@@ -1,6 +1,7 @@
 import { forwardRef, useState } from 'react'
 
 import { clsx } from 'clsx'
+import { log } from "util";
 
 import { INPUT_TYPES } from '../lib/constants/input-type-enum'
 import s from '../lib/styles/text-field.module.scss'
@@ -14,12 +15,12 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(
 
     const classNames = {
       root: clsx(s.root, className, disabled && s.disabled),
-      label: clsx(s.label),
+      label: clsx(label && s.label),
       container: clsx(s.inputContainer),
       leftIcon: clsx(s.leftIcon),
-      input: clsx(s.input, s[`${inputType}`], error && s.inputError),
+      input: clsx(s.input, s[`${inputType}`], error && s.inputError, className),
       rightIcon: clsx(s.rightIcon),
-      error: clsx(s.error),
+      error: clsx(error && s.error),
     }
 
     const showHidePassword = () => {

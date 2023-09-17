@@ -12,7 +12,7 @@ type LabelProps = {
 export const Label: FC<PropsWithChildren<LabelProps>> = ({ id, labelTitle, children }) => (
   <>
     <LabelRDX.Root htmlFor={id}>
-      <Typography variant="regular-16">{labelTitle}</Typography>
+      <Typography variant="regular-14">{labelTitle}</Typography>
 
       {children}
     </LabelRDX.Root>
