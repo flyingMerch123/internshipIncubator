@@ -1,0 +1,63 @@
+import { useState } from 'react'
+
+import { Meta } from '@storybook/react'
+
+import { DatePicker } from '@/ui/date-picker/date-picker'
+
+export default {
+  title: 'Components/Data Entry/Date Picker',
+  component: DatePicker,
+} as Meta<typeof DatePicker>
+
+export const Default = {
+  render(args: any) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [startDate, setStartDate] = useState(null)
+
+    return <DatePicker startDate={startDate} setStartDate={setStartDate} {...args} />
+  },
+
+  args: {
+    label: 'Дата',
+    placeholder: 'Выбрать дату',
+    disabled: false,
+  },
+}
+
+export const DefaultWithErrors = {
+  ...Default,
+  args: {
+    ...Default.args,
+    error: true,
+    errorMessage: 'Some error',
+  },
+}
+
+export const DefaultDisabled = {
+  ...Default,
+  args: {
+    ...Default.args,
+    disabled: true,
+  },
+}
+
+export const Range = {
+  render(args: any) {
+    const [startDate, setStartDate] = useState<Date | null>(null)
+    const [endDate, setEndDate] = useState<Date | null>(null)
+
+    return (
+      <DatePicker
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        {...args}
+      />
+    )
+  },
+
+  args: {
+    placeholder: 'Выбрать период',
+  },
+}
