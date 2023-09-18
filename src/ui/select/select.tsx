@@ -11,7 +11,6 @@ export type Option = { label: string | ReactElement; value: string }
 
 type CommonProps = {
   value: string | ReactElement
-  onChange: (value: string) => void
   placeholder?: string | ReactElement
   variant?: 'primary' | 'pagination' | 'language'
   options: Array<Option>
@@ -19,8 +18,15 @@ type CommonProps = {
   width?: CSSProperties['width']
   rootClassName?: string
   open?: boolean
+  onChange: (value: string) => void
 }
-export type SelectProps = Omit<ComponentPropsWithoutRef<'select'>, keyof CommonProps> & CommonProps
+type ConditionalMultipleProps =
+  | { onChange: (value: string) => void }
+  | { onChange: (value: number) => void }
+
+export type SelectProps = Omit<ComponentPropsWithoutRef<'select'>, keyof CommonProps> &
+  CommonProps &
+  ConditionalMultipleProps
 export const Select: FC<SelectProps> = ({
   variant = 'primary',
   placeholder,
