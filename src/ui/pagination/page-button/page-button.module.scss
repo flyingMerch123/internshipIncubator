@@ -1,0 +1,46 @@
+.item {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  color: #0d0b0c;
+
+  border-radius: 2px;
+
+  &:focus-visible {
+    outline: 2px solid #76acf9;
+  }
+
+  &:disabled {
+    cursor: initial;
+    opacity: 1;
+  }
+
+  &:hover:not(&:disabled) {
+    //color: var(--color-light-100);
+    background-color: var(--color-dark-500);
+
+    .text {
+      color: var(--color-light-100);
+    }
+  }
+
+  &.selected {
+    background-color: var(--color-light-100);
+
+    .text {
+      color: var(--color-dark-900);
+    }
+  }
+}
+
+.text {
+  color: var(--color-light-100);
+}

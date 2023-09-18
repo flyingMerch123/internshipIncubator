@@ -1,0 +1,12 @@
+.selectBox {
+  display: flex;
+  gap: 10.2px;
+  align-items: center;
+  color: var(--color-light-100);
+}
+
+.select {
+  flex-shrink: 0;
+
+  //width: 50px;
+}

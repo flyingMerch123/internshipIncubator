@@ -1,0 +1,43 @@
+.item {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-light-100);
+
+  border-radius: 2px;
+
+  &:focus-visible {
+    outline: 2px solid #76acf9;
+  }
+
+  &:disabled {
+    cursor: initial;
+    opacity: 1;
+  }
+
+  &:hover:not(&:disabled) {
+    background-color: var(--color-dark-500);
+
+    .icon {
+      color: var(--color-light-100);
+    }
+  }
+
+  &.selected {
+    color: var(--color-light-100);
+
+    //background-color: #0d0b0c;
+  }
+}
+
+.icon {
+  .item:disabled & {
+    // important because icons have style prop
+    color: #b3b0b1 !important;
+  }
+}
