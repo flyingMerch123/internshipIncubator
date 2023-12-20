@@ -78,6 +78,7 @@ export const CustomSelect = ({
         )}
 
         <button
+          tabIndex={-1}
           className={styles.chevron}
           onClick={() => {
             setIsOpen(!isOpen)
