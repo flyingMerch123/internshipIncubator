@@ -10,8 +10,10 @@ import { HideIcon, SearchIcon, ShowIcon } from '@/app/assets/svg'
 import { Typography } from '@/ui/typography/typography'
 
 export const TextField = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, inputType = 'text', disabled, error, ...rest }, ref) => {
+  ({ className, label, required = false, inputType = 'text', disabled, error, ...rest }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
+
+    const textFieldNames = ['userName', 'email', 'password', 'confirmPassword']
 
     const classNames = {
       root: clsx(s.root, className, disabled && s.disabled),
@@ -22,7 +24,13 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(
       rightIcon: clsx(s.rightIcon),
       error: clsx(error && s.error),
     }
-
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (rest.name ? textFieldNames.includes(rest.name) : false) {
+        if (event.key === ' ' || event.code === 'Space') {
+          event.preventDefault()
+        }
+      }
+    }
     const showHidePassword = () => {
       if (!disabled) {
         setShowPassword(!showPassword)
@@ -49,7 +57,12 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={classNames.root}>
-        {label && <Typography className={classNames.label}>{label}</Typography>}
+        {label && (
+          <Typography className={classNames.label}>
+            {label}
+            {required && <span className={s.required}>*</span>}
+          </Typography>
+        )}
         <div className={classNames.container}>
           <input
             aria-label={label}
@@ -57,6 +70,7 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(
             className={classNames.input}
             type={type}
             ref={ref}
+            onKeyDown={handleKeyDown}
             {...rest}
           />
           {leftIcon}

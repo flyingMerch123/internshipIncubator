@@ -11,7 +11,8 @@ import { Typography } from '@/ui'
 
 type ModalProps = {
   open?: boolean
-  onOpenChange?: (open: boolean) => void
+  onChange?: (open: boolean) => void
+
   children: ReactNode
 }
 type ModalContentProps = {
@@ -19,37 +20,52 @@ type ModalContentProps = {
   children: ReactNode
   className?: string
   onInteractOutside?: (event: PointerDownOutsideEvent | FocusOutsideEvent) => void
+  isModified?: boolean
+  onClose?: () => void
 }
-export const Modal = ({ open, onOpenChange, children }: ModalProps) => {
+export const Modal = ({ open, onChange, children }: ModalProps) => {
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+    <Dialog.Root open={open} onOpenChange={onChange}>
       {children}
     </Dialog.Root>
   )
 }
 
-const ModalContent = ({ title, children, className, ...props }: ModalContentProps) => {
-  const classNames = {
-    main: clsx(s.main, className),
-  }
+const ModalContent = ({
+  title,
+  isModified = false,
+  onClose,
+  className,
+  children,
+  ...props
+}: ModalContentProps) => {
+  const styles = clsx(s.main, className)
 
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={s.overlay} />
-      <Dialog.Content className={s.content} {...props}>
-        <div className={s.header}>
-          <Dialog.Title>
-            <Typography className={s.title} variant="h1">
-              {title}
-            </Typography>
-          </Dialog.Title>
-          <Dialog.Close aria-label="Close" className={s.close}>
-            <CloseIcon />
-          </Dialog.Close>
-        </div>
-        <div className={s.separator}></div>
-        <div className={classNames.main}>{children}</div>
-      </Dialog.Content>
+      <Dialog.Overlay className={s.overlay}>
+        <Dialog.Content className={s.content} {...props}>
+          {!isModified && (
+            <>
+              <div className={s.header}>
+                <Dialog.Title>
+                  <Typography className={s.title} variant="h1">
+                    {title}
+                  </Typography>
+                </Dialog.Title>
+
+                <Dialog.Close aria-label="Close" className={s.close} onClick={onClose}>
+                  <CloseIcon />
+                </Dialog.Close>
+              </div>
+
+              <div className={s.separator}></div>
+            </>
+          )}
+
+          <div className={styles}>{children}</div>
+        </Dialog.Content>
+      </Dialog.Overlay>
     </Dialog.Portal>
   )
 }

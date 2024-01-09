@@ -46,11 +46,13 @@ export const MenuItem = <T extends ElementType = typeof Link>({
       <Component
         href={href}
         className={styles.link}
+        tabIndex={disabled ? -1 : 0}
         aria-disabled={disabled}
         aria-hidden={disabled}
         {...props}
       >
         {children}
+
         <SVGMenuIcon />
         <Typography className={styles.label}>{label}</Typography>
       </Component>

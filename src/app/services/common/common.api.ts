@@ -7,17 +7,19 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { Mutex } from 'async-mutex'
 
-import { authActions } from '@/app/services/auth/auth.slice'
-import { RootState } from '@/app/store/store'
+import { authApiUrls } from '@/app/constants'
+import { getFromSessionStorage, setToSessionStorage } from '@/app/utils'
+
+const { baseUrl, logout, refreshMe } = authApiUrls
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://flying-merch.vercel.app/',
+  baseUrl: baseUrl(),
   credentials: 'include',
-  prepareHeaders: (headers, api) => {
-    const token = (api.getState() as RootState).auth.accessToken
+  prepareHeaders: headers => {
+    const token = getFromSessionStorage('accessToken', null)
 
     if (token) {
-      headers.set('authorization', `${token}`)
+      headers.set('authorization', `Bearer ${token}`)
     }
 
     return headers
@@ -33,7 +35,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result.error && result.error.status === 401) {
+  if (result?.meta?.response?.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
 
@@ -41,25 +43,18 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         const refreshResult = await baseQuery(
           {
             method: 'POST',
-            url: '/api/auth/new-tokens',
+            url: refreshMe(),
           },
           api,
           extraOptions
         )
 
         if (refreshResult.meta?.response?.status === 200) {
-          if (refreshResult?.data) {
-            api.dispatch(
-              authActions.setToken({
-                data: refreshResult.data,
-              })
-            )
-          }
           result = await baseQuery(args, api, extraOptions)
         } else {
           await baseQuery(
             {
-              url: '/api/auth/logout',
+              url: logout(),
               method: 'POST',
             },
             api,
@@ -75,12 +70,20 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     }
   }
 
+  // eslint-disable-next-line no-prototype-builtins
+  if ((result?.data as { accessToken?: string })?.hasOwnProperty('accessToken')) {
+    setToSessionStorage('accessToken', (result.data as { accessToken: string }).accessToken)
+  }
+  if (result?.meta?.request.url === 'https://api.freedomindz.site/api/v1/auth/logout') {
+    sessionStorage.removeItem('accessToken')
+  }
+
   return result
 }
 
 export const commonApi = createApi({
   reducerPath: 'commonApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['ME'],
+  tagTypes: ['ME', 'Profile'],
   endpoints: () => ({}),
 })

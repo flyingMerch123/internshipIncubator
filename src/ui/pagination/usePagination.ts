@@ -43,7 +43,7 @@ export const usePagination = ({
       return range(1, totalPageCount)
     }
     /*
-        Calculate left and right sibling index and
+        Calculate left and right sibling ChevronDown.tsx and
         make sure they are within range 1 and totalPageCount
     */
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
@@ -88,5 +88,5 @@ export const usePagination = ({
     }
 
     return []
-  }, [totalCount, pageSize, siblingCount, currentPage])
+  }, [totalCount, pageSize, siblingCount, currentPage, DOTS])
 }

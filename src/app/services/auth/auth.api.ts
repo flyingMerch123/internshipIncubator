@@ -1,6 +1,7 @@
-import { authApiUrls } from '@/app/constants/routes/auth'
+import { authApiUrls, authApiUrlsV2 } from '@/app/constants/routes/auth'
 import {
   Code,
+  GetMe,
   NewPasswordCredentials,
   SignInCredentials,
   UserCredentials,
@@ -8,13 +9,28 @@ import {
 import { commonApi } from '@/app/services/common/common.api'
 import { GoogleUser } from '@/app/services/google/google.api.types'
 
+const {
+  signIn,
+  signUp,
+  createNewPassword,
+  passwordRecovery,
+  refreshMe,
+  logout,
+  signWithGoogle,
+  getMe,
+  githubOAuthPage,
+  googleOAuthPage,
+  registrationConfirmation,
+  resendEmail,
+} = authApiUrls
+
 export const authAPI = commonApi.injectEndpoints({
   endpoints: builder => ({
-    getMe: builder.query<any, void>({
+    getMe: builder.query<GetMe, void>({
       query: () => {
         return {
           method: 'GET',
-          url: authApiUrls.getMe(),
+          url: getMe(),
         }
       },
       extraOptions: { maxRetries: 0 },
@@ -24,7 +40,7 @@ export const authAPI = commonApi.injectEndpoints({
       query: args => {
         return {
           method: 'POST',
-          url: authApiUrls.signUp(),
+          url: signUp(),
           body: args,
         }
       },
@@ -33,36 +49,35 @@ export const authAPI = commonApi.injectEndpoints({
       query: code => {
         return {
           method: 'POST',
-          url: authApiUrls.resendEmail(),
+          url: resendEmail(),
           body: code,
         }
       },
     }),
-    confirmAccount: builder.query<void, Code>({
+    emailConfirmation: builder.mutation<void, Code>({
       query: code => {
         return {
-          method: 'GET',
-          url: authApiUrls.registrationConfirmation(),
+          method: 'POST',
+          url: registrationConfirmation(),
           params: code,
         }
       },
     }),
     passwordRecovery: builder.mutation<void, { email: string }>({
-      query: email => {
+      query: args => {
         return {
           method: 'POST',
-          url: authApiUrls.passwordRecovery(),
-          body: email,
+          url: passwordRecovery(),
+          body: args,
         }
       },
     }),
     createNewPassword: builder.mutation<void, NewPasswordCredentials>({
-      query: ({ newPassword, token }) => {
+      query: args => {
         return {
           method: 'POST',
-          url: authApiUrls.createNewPassword(),
-          body: { newPassword },
-          params: { token },
+          url: createNewPassword(),
+          body: args,
         }
       },
     }),
@@ -70,25 +85,25 @@ export const authAPI = commonApi.injectEndpoints({
       query: args => {
         return {
           method: 'POST',
-          url: authApiUrls.signIn(),
+          url: signIn(),
           body: args,
         }
       },
 
       invalidatesTags: ['ME'],
     }),
-    refreshMe: builder.query<{ accessToken: string }, void>({
+    refreshMe: builder.mutation<{ accessToken: string }, void>({
       query: () => {
         return {
-          method: 'GET',
-          url: authApiUrls.refreshMe(),
+          method: 'POST',
+          url: refreshMe(),
         }
       },
     }),
     signOut: builder.mutation<void, void>({
       query: () => ({
         method: 'POST',
-        url: authApiUrls.logout(),
+        url: logout(),
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         dispatch(
@@ -104,13 +119,14 @@ export const authAPI = commonApi.injectEndpoints({
           //patchResult.undo()
         }
       },
+      invalidatesTags: ['ME'],
     }),
 
     googleAuth: builder.mutation<any, GoogleUser>({
       query: user => {
         return {
           method: 'POST',
-          url: authApiUrls.signWithGoogle(),
+          url: signWithGoogle(),
           body: user,
         }
       },
@@ -119,7 +135,7 @@ export const authAPI = commonApi.injectEndpoints({
       query: user => {
         return {
           method: 'GET',
-          url: authApiUrls.googleOAuthPage(),
+          url: googleOAuthPage(),
           body: user,
         }
       },
@@ -129,7 +145,7 @@ export const authAPI = commonApi.injectEndpoints({
       query: () => {
         return {
           method: 'GET',
-          url: authApiUrls.githubOAuthPage(),
+          url: githubOAuthPage(),
         }
       },
     }),
@@ -137,10 +153,10 @@ export const authAPI = commonApi.injectEndpoints({
 })
 
 export const {
-  useConfirmAccountQuery,
+  useEmailConfirmationMutation,
+  useRefreshMeMutation,
   usePasswordRecoveryMutation,
   useCreateNewPasswordMutation,
-  useRefreshMeQuery,
   useResendEmailMutation,
   useSignOutMutation,
   useGetMeQuery,

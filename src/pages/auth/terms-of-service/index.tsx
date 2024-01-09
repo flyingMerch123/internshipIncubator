@@ -1,4 +1,5 @@
-import { authNavigationUrls, useTranslation } from '@/app'
+import { useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
 import { TextContainer } from '@/components'
 import { BackToPrevious } from '@/ui'
 

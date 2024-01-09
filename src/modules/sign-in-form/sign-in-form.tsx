@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 
 import { DevTool } from '@hookform/devtools'
-import { LinearProgress } from '@mui/joy'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 
 import s from './sign-in-form.module.scss'
 
-import {
-  authNavigationUrls,
-  ErrorWithData,
-  showError,
-  useSignInMutation,
-  useTranslation,
-} from '@/app'
-import { ControlledTextField } from '@/components/text-field-controlled/controlled-text-field'
-import { useSignInForm } from '@/modules/sign-in-form/use-sign-in-form'
+import { ErrorWithData, useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { useSignInMutation } from '@/app/services/auth/auth.api'
+import { showError } from '@/app/utils'
+import { LoaderV2, ControlledTextField } from '@/components'
+import { useSignInForm } from '@/modules'
 import { Button, Card, GithubButton, GoogleButton, Typography } from '@/ui'
 
 export const SignInForm = () => {
@@ -37,7 +33,7 @@ export const SignInForm = () => {
     signIn(data)
       .unwrap()
       .then(() => {
-        toast.success('you are sign in successfully')
+        toast.success('signed in successfully!')
       })
       .catch((error: ErrorWithData) => {
         showError(error)
@@ -47,9 +43,8 @@ export const SignInForm = () => {
   return (
     <div>
       <Card className={s.container}>
-        <div className={s.progressBar}>
-          {(isLoading || progressBar) && <LinearProgress thickness={3} color={'neutral'} />}
-        </div>
+        <LoaderV2 isLoading={isLoading || progressBar} label={'Verifying...'} />
+
         <form className={s.form} onSubmit={onSubmitForm}>
           <div className={s.wrapper}>
             <Typography className={s.header} variant={'h1'}>

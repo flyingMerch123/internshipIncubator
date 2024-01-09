@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 
-import { BROWSER_ICON, SESSION_DEVICE_ICON } from './data'
+import { SESSION_DEVICE_ICON } from './data'
 import s from './device-information-card.module.scss'
 import { BrowserType, SessionDeviceType } from './model'
 
@@ -25,7 +25,7 @@ type DeviceInformationCardProps<T extends CardType> = {
   className?: string
 }
 
-export const DeviceInformationCard = <T extends CardType = 'DEVICE'>({
+export const DeviceInformationCard = <T extends CardType>({
   type,
   variant,
   title,
@@ -40,8 +40,7 @@ export const DeviceInformationCard = <T extends CardType = 'DEVICE'>({
 
   const styles = clsx(s.container, className)
 
-  const SVGIcon: SVGIconType =
-    type === 'SESSION' ? SESSION_DEVICE_ICON[variant] : BROWSER_ICON[variant]
+  const SVGIcon: SVGIconType = SESSION_DEVICE_ICON[type][variant]
 
   const LogoutButton =
     type === 'SESSION' ? (

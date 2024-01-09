@@ -6,6 +6,8 @@ export type MessageArrayModel = {
 }[]
 export type ErrorWithData = FetchBaseQueryError & {
   data: {
-    message: MessageArrayModel | string
+    message?: MessageArrayModel | string
+    errorsMessages?: MessageArrayModel
   }
 }
+export type Nullable<T> = T | null

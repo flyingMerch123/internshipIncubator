@@ -8,8 +8,8 @@ import {
   MessageMenuIcon,
   ProfileMenuIcon,
   SearchMenuIcon,
-  menuNavigation,
 } from '@/app'
+import { menuNavigation } from '@/app/constants'
 import { MenuItem, SidebarMenu } from '@/ui'
 
 export const MobileSidebarMenuWithItems = () => {

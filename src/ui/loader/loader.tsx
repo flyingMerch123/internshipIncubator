@@ -1,5 +1,13 @@
+import { CSSProperties } from 'react'
+
 import s from './loader.module.scss'
 
-export const Loader = () => {
-  return <span className={s.loader}></span>
+type LoaderProps = {
+  isLoading?: boolean
+  width?: CSSProperties['width']
+  height?: CSSProperties['height']
+}
+
+export const Loader = ({ isLoading, width, height }: LoaderProps) => {
+  return isLoading ? <span className={s.loader} style={{ width, height }}></span> : null
 }

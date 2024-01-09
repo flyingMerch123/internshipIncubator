@@ -1,16 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import confirmationImg from '../../../public/assets/images/link-confirmation.svg'
 
 import s from './link-confirmed.module.scss'
 
-import { useTranslation, authNavigationUrls } from '@/app'
+import { useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { useEmailConfirmationMutation } from '@/app/services/auth/auth.api'
 import { Button, Typography } from '@/ui'
 
 export const LinkConfirmed = () => {
+  const { query } = useRouter()
+  const [confirmEmail] = useEmailConfirmationMutation()
+
   const { t } = useTranslation()
   const { title, description, button: label } = t.linkConfirmedPage
+
+  const confirmAccount = () => {
+    confirmEmail({
+      code: query.code as string,
+    })
+  }
 
   return (
     <div>
@@ -21,7 +33,12 @@ export const LinkConfirmed = () => {
         <Typography as={'p'} variant={'regular-16'} className={s.description}>
           {description}
         </Typography>
-        <Button as={Link} className={s.button} href={authNavigationUrls.signIn()}>
+        <Button
+          as={Link}
+          className={s.button}
+          href={authNavigationUrls.signIn()}
+          onClick={confirmAccount}
+        >
           {label}
         </Button>
       </div>

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-export function useDisclose(initState?: boolean) {
+export const useDisclose = (initState?: boolean) => {
   const [isOpen, setIsOpen] = useState(initState || false)
   const onOpen = useCallback(() => {
     setIsOpen(true)

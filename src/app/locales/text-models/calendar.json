@@ -1,0 +1,36 @@
+{
+  "en": {
+    "month": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "localeMonth": "en"
+  },
+  "ru": {
+    "month": [
+      "Январь",
+      "Февраль",
+      "Март",
+      "Апрель",
+      "Май",
+      "Июнь",
+      "Июль",
+      "Август",
+      "Сентябрь",
+      "Октябрь",
+      "Ноябрь",
+      "Декабрь"
+    ],
+    "localeMonth": "ru"
+  }
+}

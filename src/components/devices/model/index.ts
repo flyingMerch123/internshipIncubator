@@ -20,5 +20,3 @@ type ObjectValuesType<T> = T[keyof T]
 export type SessionDeviceType = ObjectValuesType<typeof SESSION_DEVICES>
 
 export type BrowserType = ObjectValuesType<typeof BROWSERS>
-
-export type Nullable<T> = T | null

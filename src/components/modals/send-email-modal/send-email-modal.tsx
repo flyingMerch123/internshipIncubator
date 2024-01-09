@@ -9,7 +9,7 @@ export const SendEmailModal = () => {
 
   return (
     <div>
-      <Modal open={isOpen} onOpenChange={setIsOpen}>
+      <Modal open={isOpen} onChange={setIsOpen}>
         <Modal.Button asChild>
           <Button>Open modal</Button>
         </Modal.Button>

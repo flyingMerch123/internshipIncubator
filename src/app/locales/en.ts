@@ -13,6 +13,10 @@ import {
   CharacterPageTextModel,
   SidebarMenuModel,
   PaginationTextModel,
+  Calendar,
+  GeneralSettingsModel,
+  NavigationTabsModel,
+  ConfirmationModal,
 } from '@/app/locales/text-models'
 
 const navigation = NavigationTextModel.en
@@ -28,8 +32,16 @@ const signUp = SignUpTextModel.en
 const signIn = SignInTextModel.en
 const sidebarMenu = SidebarMenuModel.en
 const pagination = PaginationTextModel.en
+const calendar = Calendar.en
+const generalSettings = GeneralSettingsModel.en
+const navigationTabs = NavigationTabsModel.en
+const confirmationModal = ConfirmationModal.en
 
 export const en: LocaleType = {
+  calendar: {
+    month: calendar.month,
+    locale: calendar.localeMonth,
+  },
   navigation: {
     title: navigation.title,
     menu: navigation.links,
@@ -64,4 +76,9 @@ export const en: LocaleType = {
   },
   sidebarMenu: sidebarMenu,
   pagination: pagination,
+  profileSettings: {
+    navigation: navigationTabs,
+    generalSettings,
+  },
+  confirmationModal: confirmationModal,
 }

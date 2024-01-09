@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {{reactStrictMode: boolean, i18n: {defaultLocale: string, locales: string[], localeDetection: boolean}}} */
 const nextConfig = {
   reactStrictMode: true,
   i18n: {

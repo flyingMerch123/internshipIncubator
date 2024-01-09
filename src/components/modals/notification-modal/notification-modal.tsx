@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import s from './notification-modal.module.scss'
 
@@ -6,17 +6,14 @@ import { Button, Modal, Typography } from '@/ui'
 
 type Props = {
   message?: string
-  showModal?: boolean
-  trigger?: ReactNode
-  onOpen?: (open: boolean) => void
   isOpen: boolean
   onClose?: () => void
 }
-export const NotificationModal = ({ trigger, message, isOpen, onOpen, onClose }: Props) => {
+export const NotificationModal = ({ message, isOpen, onClose }: Props) => {
   return (
     <div>
-      <Modal open={isOpen} onOpenChange={onOpen}>
-        {trigger && <Modal.Button asChild>{trigger}</Modal.Button>}
+      <Modal open={isOpen} onChange={onClose}>
+        <Modal.Button asChild />
         <Modal.Content
           className={s.content}
           title="Email sent"

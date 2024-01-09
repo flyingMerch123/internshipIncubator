@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { LinkConfirmed } from '@/modules'
 
 const RegistrationConfirmation = () => {

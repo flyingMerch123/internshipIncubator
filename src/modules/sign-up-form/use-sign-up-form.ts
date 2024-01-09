@@ -32,7 +32,7 @@ export const useSignupForm = () => {
         .min(6, `${password.length}`)
         .max(20, `${password.maxLength}`)
         .regex(
-          /(?=.*[0-9])(?=.*[!"#$%&'()*+,-_./:;<=>?@[\]^{|}~])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!"#$%&'()*+,-_./:;<=>?@[\]^{|}~]{6,}/g,
+          /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])[0-9A-Za-z!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{6,20}$/,
           `${password.pattern}`
         ),
       confirmPassword: z.string({ required_error: `${confirmPassword.required}` }).trim(),

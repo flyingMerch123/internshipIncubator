@@ -1,41 +1,55 @@
-import React from 'react'
+import { useRouter } from 'next/router'
 
-import Link from 'next/link'
+import { authNavigationUrls } from '@/app/constants'
+import { useGetMeQuery } from '@/app/services/auth/auth.api'
+import { LoaderV2, POST_COMMENTS, PostCard, PostCardXL } from '@/components'
 
-import { authNavigationUrls, useTranslation } from '@/app'
-import { Typography } from '@/ui'
+const Home = () => {
+  const { data: me, isLoading } = useGetMeQuery()
+  const { push } = useRouter()
 
-export default function Home() {
-  const id = 'idFromURL'
-  const { t } = useTranslation()
-  const { userProfile, passwordRecovery, createNewPassword, forgotPassword, signUp, signIn } =
-    t.navigation.menu
+  if (isLoading) {
+    return <LoaderV2 isLoading={isLoading} />
+  }
+
+  if (!me) {
+    void push(authNavigationUrls.signIn())
+  }
 
   return (
-    <div style={{ padding: '35px' }}>
-      <Typography as="h1" variant="large">
-        {t.navigation.title}
-      </Typography>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Link href={authNavigationUrls.signIn()}>
-          <Typography variant="regular-link">{signIn}</Typography>
-        </Link>
-        <Link href={authNavigationUrls.signUp()}>
-          <Typography variant="regular-link">{signUp}</Typography>
-        </Link>
-        <Link href={authNavigationUrls.forgotPassword()}>
-          <Typography variant="regular-link">{forgotPassword}</Typography>
-        </Link>
-        <Link href={authNavigationUrls.createNewPassword()}>
-          <Typography variant="regular-link">{createNewPassword}</Typography>
-        </Link>
-        <Link href={authNavigationUrls.passwordRecovery()}>
-          <Typography variant="regular-link">{passwordRecovery}</Typography>
-        </Link>
-        <Link href={`/user-profile/${id}`}>
-          <Typography variant="regular-link">{userProfile}</Typography>
-        </Link>
-      </div>
-    </div>
+    me && (
+      <>
+        <h1 style={{ margin: '3em', textAlign: 'center' }}>Home</h1>
+
+        <h2 style={{ marginBottom: '1em', textAlign: 'center' }}>Public Account</h2>
+        <PostCard
+          cardType={'regular'}
+          url={'/assets/avatar/resized/4.jpf'}
+          postdId={'23'}
+          userName={'Vikki'}
+          account={'public'}
+          description={''}
+          comments={POST_COMMENTS?.comments}
+        />
+
+        <h2 style={{ marginBottom: '1em', textAlign: 'center' }}>Friend Account</h2>
+        <PostCard
+          cardType={'regular'}
+          url={POST_COMMENTS.url}
+          userName={'Darius'}
+          account={'friend'}
+          description={''}
+          comments={[]}
+          postdId={'22'}
+        />
+
+        <h2 style={{ margin: '1em', textAlign: 'center' }}>
+          Personal Account (Post Details/Editing)
+        </h2>
+        <PostCardXL {...POST_COMMENTS} />
+      </>
+    )
   )
 }
+
+export default Home

@@ -7,16 +7,12 @@ import { useRouter } from 'next/router'
 import s from './forgot-password-form.module.scss'
 import { useForgotPasswordForm } from './validation-schema'
 
-import {
-  authNavigationUrls,
-  useTranslation,
-  useDisclose,
-  usePasswordRecoveryMutation,
-  useMatchMedia,
-  TagProcessor,
-} from '@/app'
+import { useDisclose, useMatchMedia, useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { usePasswordRecoveryMutation } from '@/app/services/auth/auth.api'
 import { NotificationModal } from '@/components'
-import { Loader, Button, Card, TextField, Typography, ControlledReCaptcha } from '@/ui'
+import { Button, Card, ControlledReCaptcha, Loader, TextField, Typography } from '@/ui'
+
 export const ForgotPasswordForm = () => {
   const { isMobile } = useMatchMedia()
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
@@ -34,7 +30,7 @@ export const ForgotPasswordForm = () => {
   const labels = {
     button: isSubmitted ? submitTextV2 : submitTextV1,
     submission() {
-      return isLoading ? <Loader /> : this.button
+      return isLoading ? <Loader isLoading /> : this.button
     },
   }
 
@@ -76,7 +72,7 @@ export const ForgotPasswordForm = () => {
       <Typography as={'h1'} variant={'h1'} className={s.title}>
         {title}
       </Typography>
-      <form onSubmit={sendForm}>
+      <form onSubmit={sendForm} onInput={clearError}>
         {/*{DEVTOOLS}*/}
         <DevTool control={control} />
         {/*{DEVTOOLS}*/}
@@ -110,12 +106,14 @@ export const ForgotPasswordForm = () => {
         <Button fullWidth className={s.button} type={'submit'} disabled={!isValid}>
           {labels.submission()}
         </Button>
-
-        <Typography as={'h3'} variant={'bold-16'} className={s.link}>
-          {link.description}
-          <Link href={authNavigationUrls.signIn()}>{link.text}</Link>
-        </Typography>
-
+        <Button
+          className={s.signUpBtn}
+          as={Link}
+          variant={'link'}
+          href={authNavigationUrls.signUp()}
+        >
+          {`${link.description} ${link.text}`}
+        </Button>
         {!isMobile && !isSubmitted && (
           <ControlledReCaptcha
             control={control}
@@ -131,7 +129,6 @@ export const ForgotPasswordForm = () => {
 
       <NotificationModal
         isOpen={isOpen}
-        onOpen={onModalClose}
         onClose={onModalClose}
         message={`${message.notificationMessage} ${emailAddress} `}
       />

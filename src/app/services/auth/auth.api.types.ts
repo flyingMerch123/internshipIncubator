@@ -1,3 +1,5 @@
+import { Nullable } from '@/app'
+
 export type GitHubUser = {
   login: string
   node_id: string
@@ -17,9 +19,11 @@ export type Code = {
 
 export type NewPasswordCredentials = {
   newPassword: string
-  token: string
+  recoveryCode: string
 }
 export type SignInCredentials = {
   email: string
   password: string
 }
+
+export type GetMe = Nullable<Partial<SignInCredentials & { userId: number }>>

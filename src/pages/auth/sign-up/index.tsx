@@ -4,11 +4,7 @@ import { SignUpForm } from '@/modules'
 import { FlexWrapper } from '@/templates'
 
 const SignUpPage = () => {
-  return (
-    <FlexWrapper>
-      <SignUpForm />
-    </FlexWrapper>
-  )
+  return <SignUpForm />
 }
 
 export default SignUpPage

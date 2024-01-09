@@ -6,4 +6,5 @@ export type InputProps = {
   label?: string
   inputType?: (typeof INPUT_TYPES)[keyof typeof INPUT_TYPES]
   error?: string
+  required?: boolean
 } & Omit<ComponentPropsWithoutRef<'input'>, 'type'>

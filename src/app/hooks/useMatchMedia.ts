@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react'
+import { useState, useLayoutEffect, useEffect } from 'react'
 
 import { MatchMedia } from '@/app'
 
@@ -18,7 +18,7 @@ export const useMatchMedia = (): MatchMedia => {
     isDesktop: false,
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const getValues = () => {
       return {
         isMobile: window.matchMedia(QUERIES.MOBILE).matches,

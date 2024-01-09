@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 import { SelectModel, SelectVariant } from './select-types'
 import s from './select.module.scss'
 
-import { ArrowDownIcon } from '@/app/assets/svg/arrow-down-icon-svg/arrow-down-icon'
+import { ArrowDownIcon } from '@/app/'
 
 const IconSize = {
   [SelectVariant.Pagination]: 16,

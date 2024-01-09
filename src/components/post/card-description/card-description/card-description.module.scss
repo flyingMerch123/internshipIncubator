@@ -1,0 +1,12 @@
+.description {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+
+  .info {
+    & p {
+      display: block;
+    }
+  }
+}

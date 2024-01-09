@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import s from './header.module.scss'
 
-import { authNavigationUrls, useMatchMedia } from '@/app'
+import { useMatchMedia } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
 import { notifications } from '@/app/data/notifications-bell/notifications-bell'
 import { LanguageSelect, NotificationsBell } from '@/components'
 import { DropdownMenuWithItems } from '@/modules'
