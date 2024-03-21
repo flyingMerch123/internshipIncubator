@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import s from './styles.module.scss'
-
 import { MobileSidebarMenuWithItems } from '@/modules'
 
+import s from './styles.module.scss'
+
 const meta = {
-  title: 'Navigation/MobileSidebarMenuWithItems',
-  component: MobileSidebarMenuWithItems,
+  argTypes: {},
   args: {
     className: s.story,
   },
+  component: MobileSidebarMenuWithItems,
   decorators: [
     Story => (
       <div style={{ height: '20rem', width: '40rem' }}>
@@ -18,7 +18,7 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Navigation/MobileSidebarMenuWithItems',
 } satisfies Meta<typeof MobileSidebarMenuWithItems>
 
 export default meta

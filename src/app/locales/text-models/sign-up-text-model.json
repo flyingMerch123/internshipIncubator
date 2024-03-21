@@ -50,7 +50,6 @@
     "policyLinks": "<1>termsOfService</1> и <2>privacyPolicy</2>",
     "termsOfService": "Условия обслуживания",
     "privacyPolicy": "Политика конфиденциальности",
-
     "notificationMessage": "Мы отправили ссылку для подтверждения вашей электронной почты на",
     "formErrors": {
       "userName": {

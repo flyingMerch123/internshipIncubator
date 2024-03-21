@@ -1,2 +1,5 @@
 export * from './pluralize'
 export * from './tag-processor'
+export * from './is-old-enough'
+export * from './validate-form'
+export * from './set-date-format'

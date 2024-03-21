@@ -1,24 +1,23 @@
+import { BellIcon } from '@/app/assets/svg'
 import { clsx } from 'clsx'
 
 import s from './bell.module.scss'
 
-import { BellIcon } from '@/app/assets/svg'
-
 type BellProps = {
+  className?: string
   messageNumber?: number
   onClick?: () => void
-  className?: string
 }
 
-export const Bell = ({ messageNumber, onClick, className }: BellProps): JSX.Element => {
+export const Bell = ({ className, messageNumber, onClick }: BellProps): JSX.Element => {
   const classNames = {
-    root: clsx(s.root, className),
     bell: clsx(s.bell, className),
     label: clsx(s.label),
+    root: clsx(s.root, className),
   }
 
   return (
-    <div onClick={onClick} className={classNames.root}>
+    <div className={classNames.root} onClick={onClick}>
       <BellIcon className={classNames.bell} />
       {messageNumber && <span className={classNames.label}>{messageNumber}</span>}
     </div>

@@ -1,0 +1,32 @@
+{
+  "en": {
+    "accountType": "Account type",
+    "yourSubscriptionCosts": "Your subscription costs",
+    "per": "per",
+    "oneDay": "1 Day",
+    "sevenDays": "7 Days",
+    "month": "month",
+    "or": "Or",
+    "personal": "Personal",
+    "business": "Business",
+    "current": "Current subscription",
+    "expireAt": "Expire at",
+    "nextPayment": "Next payment",
+    "autoRenewal": "Auto-Renewal"
+  },
+  "ru": {
+    "accountType": "Тип аккаунта",
+    "yourSubscriptionCosts": "Стоимость подписки",
+    "per": "за",
+    "oneDay": "1 день",
+    "sevenDays": "7 дней",
+    "month": "месяц",
+    "or": "или",
+    "personal": "Личный",
+    "business": "Коммерческий",
+    "current": "Актуальные подписки",
+    "expireAt": "Дата окончания подписки",
+    "nextPayment": "Следующий платёж",
+    "autoRenewal": "Автоматическое продление "
+  }
+}

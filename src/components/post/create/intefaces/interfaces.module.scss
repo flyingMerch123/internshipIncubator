@@ -1,0 +1,39 @@
+.loopBackImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22.2rem;
+  height: 22.2rem;
+  margin-top: 7.2rem;
+
+  background-color: var(--color-dark-500);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.4rem;
+
+  button {
+    width: 100%;
+  }
+}
+
+.input {
+  height: 3.6rem;
+  margin-top: 6rem;
+}
+
+.error {
+  display: block;
+  align-self: stretch;
+
+  margin-bottom: 2.4rem;
+  padding: 0.6rem 2.4rem;
+
+  text-align: center;
+
+  background-color: var(--color-danger-900);
+  border: 1px solid var(--color-danger-500);
+}

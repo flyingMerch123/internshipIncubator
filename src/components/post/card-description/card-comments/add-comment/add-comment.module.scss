@@ -1,0 +1,44 @@
+.form {
+  overflow: hidden;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  padding: 1rem 2.4rem;
+
+  & input {
+    flex-grow: 1;
+
+    max-width: 32.7rem;
+    min-height: 2rem;
+    padding: 0.6rem 1.5rem;
+
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-m);
+    color: var(--text-color-secondary);
+
+    border-radius: 0.3rem;
+
+    &:focus {
+      color: var(--text-color-primary);
+      outline: 1px solid var(--color-accent-100);
+    }
+
+    &:active {
+      color: var(--text-color-primary);
+      outline: 1px solid var(--color-accent-700);
+    }
+
+    &:disabled {
+      color: var(--text-color-disabled);
+    }
+  }
+
+  & button {
+    min-height: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    outline: none;
+  }
+}

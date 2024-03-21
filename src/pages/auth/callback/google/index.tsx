@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
+import { authNavigationUrls } from '@/app/constants'
+import { useGetGoogleMutation } from '@/app/services/google/google.api'
 import { useRouter } from 'next/router'
-
-import { useGoogleAuthMutation, useGetGoogleMutation } from '@/app'
 
 const GooglePage = () => {
   const [isFirst, setIsFirst] = useState(true)
   const router = useRouter()
   const { accessToken } = router.query
   const [getGoogleAuthData, { data }] = useGetGoogleMutation()
-  const [signUpWithGoogle] = useGoogleAuthMutation()
 
   useEffect(() => {
     if (accessToken && isFirst) {
@@ -17,9 +16,9 @@ const GooglePage = () => {
       setIsFirst(false)
     }
     if (data) {
-      signUpWithGoogle(data)
+      void router.push(`${authNavigationUrls.home()}/user-profile`)
     }
-  }, [accessToken, data, getGoogleAuthData, isFirst, signUpWithGoogle])
+  }, [accessToken, data, getGoogleAuthData, isFirst])
 
   return <div>Google</div>
 }

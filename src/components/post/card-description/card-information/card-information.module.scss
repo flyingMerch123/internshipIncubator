@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.7rem 2.4rem;
+
+  border: 1px solid transparent;
+  border-bottom-color: var(--color-dark-100);
+
+  .likes {
+    display: flex;
+    gap: 6rem;
+
+    .avatars {
+      position: relative;
+      display: inline-block;
+      min-height: 2.4rem;
+
+      .avatarFirst {
+        position: absolute;
+        z-index: 15;
+        left: 0;
+      }
+
+      .avatarSecond {
+        position: absolute;
+        z-index: 10;
+        left: 1.5rem;
+      }
+
+      .avatarThird {
+        position: absolute;
+        z-index: 5;
+        left: 2.7rem;
+      }
+    }
+  }
+
+  .created {
+    margin-top: 0.5rem;
+    color: var(--color-light-900);
+  }
+}
+
+.containerV2 {
+  padding: 1.4rem 0;
+  border: none;
+}

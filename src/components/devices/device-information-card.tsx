@@ -1,37 +1,38 @@
+import { LogOutMenuIcon, SVGIconType, setDateFormat, useMatchMedia, useTranslation } from '@/app'
+import { SessionModel } from '@/app/services/sessions/sessions.types'
+import { Card, MenuItem, Typography } from '@/ui'
 import { clsx } from 'clsx'
 
-import { BROWSER_ICON, SESSION_DEVICE_ICON } from './data'
 import s from './device-information-card.module.scss'
+
+import { SESSION_DEVICE_ICON } from './data'
 import { BrowserType, SessionDeviceType } from './model'
 
-import { LogOutMenuIcon, SVGIconType, useMatchMedia, useTranslation } from '@/app'
-import { Card, MenuItem, Typography } from '@/ui'
-
-type CardType = 'SESSION' | 'DEVICE'
+export const SESSION_CARD_TYPE = {
+  DEVICE: 'DEVICE',
+  SESSION: 'SESSION',
+} as const
 
 type VariantType = {
-  SESSION: SessionDeviceType
   DEVICE: BrowserType
+  SESSION: SessionDeviceType
 }
 
-// TODO => consider to simplify props type structure in order to eliminate potential errors in the future (as an alternative use icon prop instead of variant)
-
-type DeviceInformationCardProps<T extends CardType> = {
+type DeviceInformationCardProps<T extends keyof typeof SESSION_CARD_TYPE> = {
+  className?: string
+  currentIp?: string
+  getSessionId?: (sessionId: number) => void
+  session: SessionModel
   type: T
   variant: VariantType[T]
-  title?: string
-  ip?: string
-  lastVisit?: string
-  className?: string
 }
 
-export const DeviceInformationCard = <T extends CardType = 'DEVICE'>({
+export const DeviceInformationCard = <T extends keyof typeof SESSION_CARD_TYPE>({
+  className,
+  getSessionId,
+  session,
   type,
   variant,
-  title,
-  ip = '-',
-  lastVisit,
-  className,
 }: DeviceInformationCardProps<T>) => {
   const { isMobile } = useMatchMedia()
 
@@ -40,20 +41,22 @@ export const DeviceInformationCard = <T extends CardType = 'DEVICE'>({
 
   const styles = clsx(s.container, className)
 
-  const SVGIcon: SVGIconType =
-    type === 'SESSION' ? SESSION_DEVICE_ICON[variant] : BROWSER_ICON[variant]
+  const SVGIcon: SVGIconType = SESSION_DEVICE_ICON[type][variant]
 
-  const LogoutButton =
-    type === 'SESSION' ? (
-      <MenuItem
-        as={'button'}
-        asListItem={false}
-        onClick={() => console.log('Logged Out!')}
-        icon={LogOutMenuIcon}
-        label={labels.logout}
-        isStyled={!isMobile}
-      />
-    ) : null
+  const logoutHandler = () => {
+    getSessionId && getSessionId(session.deviceId)
+  }
+
+  const LogoutButton = type === SESSION_CARD_TYPE.SESSION && (
+    <MenuItem
+      as={'button'}
+      asListItem={false}
+      icon={LogOutMenuIcon}
+      isStyled={!isMobile}
+      label={labels.logout}
+      onClick={logoutHandler}
+    />
+  )
 
   return (
     <Card className={styles}>
@@ -64,13 +67,13 @@ export const DeviceInformationCard = <T extends CardType = 'DEVICE'>({
 
         <div className={s.details}>
           <Typography as={'p'} variant={'bold-16'}>
-            {title}
+            {session.deviceName}
           </Typography>
           <Typography as={'p'} variant={'regular-14'}>
-            {`IP: ${ip}`}
+            {`IP: ${session.ip}`}
           </Typography>
           <Typography as={'p'} variant={'small'}>
-            {lastVisit && `Last visit: ${lastVisit}`}
+            {`Last visit: ${setDateFormat(session.lastActive)}`}
           </Typography>
         </div>
       </div>

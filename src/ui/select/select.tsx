@@ -1,38 +1,38 @@
+import { ArrowDownIcon } from '@/app/'
 import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-import { SelectModel, SelectVariant } from './select-types'
 import s from './select.module.scss'
 
-import { ArrowDownIcon } from '@/app/assets/svg/arrow-down-icon-svg/arrow-down-icon'
+import { SelectModel, SelectVariant } from './select-types'
 
 const IconSize = {
-  [SelectVariant.Pagination]: 16,
-  [SelectVariant.Primary]: 24,
   [SelectVariant.Language]: 24,
   [SelectVariant.LanguageMobile]: 24,
+  [SelectVariant.Pagination]: 16,
+  [SelectVariant.Primary]: 24,
 } as const
 
 export const Select = ({
-  variant = SelectVariant.Primary,
-  placeholder,
-  value,
-  disabled,
   className,
-  onChange,
-  options,
+  disabled,
   label,
-  rootClassName,
-  width,
+  onChange,
   open,
+  options,
+  placeholder,
+  rootClassName,
+  value,
+  variant = SelectVariant.Primary,
+  width,
 }: SelectModel) => {
   const classNames = {
-    root: rootClassName,
-    trigger: clsx(s.trigger, s[variant], className),
+    content: clsx(s.content, s[variant]),
     icon: clsx(s.icon, s[variant]),
     item: clsx(s.item, s[variant]),
-    content: clsx(s.content, s[variant]),
     label: clsx(s.label, disabled && s.disabled),
+    root: rootClassName,
+    trigger: clsx(s.trigger, s[variant], className),
   }
   const withoutPlaceholder = variant === SelectVariant.Pagination ? value : 'Select Box'
   const rootStyles = { width }
@@ -53,11 +53,11 @@ export const Select = ({
           <SelectRadix.Portal>
             <SelectRadix.Content className={classNames.content} position={'popper'}>
               {options?.map((option, index) => {
-                const { value, label } =
-                  typeof option === 'string' ? { value: option, label: option } : option
+                const { label, value } =
+                  typeof option === 'string' ? { label: option, value: option } : option
 
                 return (
-                  <SelectRadix.Item value={value} className={classNames.item} key={index}>
+                  <SelectRadix.Item className={classNames.item} key={index} value={value}>
                     {label}
                   </SelectRadix.Item>
                 )

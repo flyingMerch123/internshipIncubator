@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { useTranslation } from '@/app/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).*$/
 
@@ -17,8 +17,8 @@ export const useSignInForm = () => {
   const loginFormSchema = z.object({
     email: z
       .string({
-        required_error: `${email.required}`,
         invalid_type_error: `${email.invalidEmailFormat}`,
+        required_error: `${email.required}`,
       })
       .trim()
       .nonempty(`${email.required}`)
@@ -34,7 +34,11 @@ export const useSignInForm = () => {
   type LoginFormType = z.infer<typeof loginFormSchema>
 
   return useForm<LoginFormType>({
-    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
     mode: 'onBlur',
+    resolver: zodResolver(loginFormSchema),
   })
 }

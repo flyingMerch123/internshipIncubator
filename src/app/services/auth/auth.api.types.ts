@@ -1,9 +1,11 @@
+import { Nullable } from '@/app'
+
 export type GitHubUser = {
-  login: string
-  node_id: string
   avatar_url: string
-  name: string
   email: string
+  login: string
+  name: string
+  node_id: string
 }
 export type UserCredentials = {
   email: string
@@ -17,9 +19,26 @@ export type Code = {
 
 export type NewPasswordCredentials = {
   newPassword: string
-  token: string
+  recoveryCode: string
 }
 export type SignInCredentials = {
   email: string
   password: string
+}
+
+export type UserModel = Nullable<{
+  email: string
+  userId: number
+  userName: string
+}>
+export type PasswordRecovery = {
+  baseUrl: string
+  email: string
+  recaptcha: string
+}
+export type UserRegistrationParams = {
+  baseUrl: string
+  email: string
+  password: string
+  userName: string
 }

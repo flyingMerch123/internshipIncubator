@@ -1,43 +1,46 @@
-import { useRouter } from 'next/router'
+import { MouseEventHandler } from 'react'
 
 import {
-  FavoritesMenuIcon,
+  FavouritesMenuIcon,
   LogOutMenuIcon,
   SettingIcon,
-  menuNavigation,
   StatisticsMenuIcon,
   useTranslation,
 } from '@/app'
+import { menuNavigation } from '@/app/constants'
+import { useSignOutMutation } from '@/app/services/auth/auth.api'
 import { DropdownMenu, MenuItem } from '@/ui'
 
 export const DropdownMenuWithItems = () => {
-  const { pathname } = useRouter()
+  const [logOut] = useSignOutMutation()
 
   const { t } = useTranslation()
   const labels = t.sidebarMenu
+
+  const onLogOut: MouseEventHandler<HTMLButtonElement> = e => logOut()
 
   return (
     <DropdownMenu>
       <MenuItem
         href={menuNavigation.settings()}
         icon={SettingIcon}
-        label={labels.setting}
         isStyled={false}
+        label={labels.setting}
       />
-      <MenuItem href={'#'} icon={StatisticsMenuIcon} label={labels.statistics} isStyled={false} />
+      <MenuItem href={'#'} icon={StatisticsMenuIcon} isStyled={false} label={labels.statistics} />
 
       <MenuItem
         href={menuNavigation.favorites()}
-        icon={FavoritesMenuIcon}
-        label={labels.favorites}
+        icon={FavouritesMenuIcon}
         isStyled={false}
+        label={labels.favorites}
       />
       <MenuItem
         as={'button'}
-        onClick={() => console.log('Logged Out!')}
         icon={LogOutMenuIcon}
-        label={labels.logout}
         isStyled={false}
+        label={labels.logout}
+        onClick={onLogOut}
       />
     </DropdownMenu>
   )

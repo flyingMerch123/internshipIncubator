@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: 49.1rem;
+  min-height: 60rem;
+  margin: 2rem auto;
+
+  border-color: transparent;
+  border-bottom-color: var(--color-dark-100);
+
+  & header {
+    height: 9rem;
+    padding: 0;
+    background-color: var(--bg-color-primary);
+    border: none;
+  }
+
+  & form {
+    padding: 0.3rem;
+
+    & input {
+      max-width: 100%;
+      margin-right: 3.6rem;
+      padding: 0.6rem 1.5rem 0.6rem 0.5rem;
+    }
+  }
+}

@@ -1,7 +1,7 @@
+import { LocalType } from '@/app/constants/enums'
+
 import { FlagComponent } from './flag-component'
 import { FlagSelectOption } from './language-select-types'
-
-import { LocalType } from '@/app/constants/enums'
 
 const flags = {
   en: <FlagComponent locale={LocalType.EN} />,

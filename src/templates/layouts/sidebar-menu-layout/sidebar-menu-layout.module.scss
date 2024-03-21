@@ -1,15 +1,16 @@
 .container {
   --side-menu-width: 22rem;
 
+  display: flex;
   max-width: 128rem;
   margin: 0 auto;
-  padding-left: var(--side-menu-width);
-
-  &.mobile {
-    padding-left: 0;
-  }
 
   .wrapper {
-    min-height: 200vh;
+    width: 106rem;
+    margin: 0 auto;
+  }
+
+  &.mobile {
+    padding-bottom: 7rem;
   }
 }

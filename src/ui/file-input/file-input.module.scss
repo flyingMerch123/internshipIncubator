@@ -1,0 +1,39 @@
+.input {
+  display: none;
+}
+
+.label {
+  cursor: pointer;
+
+  display: block;
+
+  padding: 0.6rem 2.4rem;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: var(--line-height-m);
+
+  background-color: var(--color-accent-500);
+  border-radius: 0.5rem;
+  caret-color: transparent;
+
+  &:focus-visible:not(.disabled) {
+    outline: 2px solid var(--color-accent-700);
+    outline-offset: 2px;
+  }
+
+  &:hover:not(.disabled) {
+    color: var(--color-light-100);
+    background: var(--color-accent-100);
+  }
+
+  &:active:not(.disabled) {
+    background: var(--color-accent-700);
+  }
+}
+
+.disabled {
+  cursor: default;
+  color: var(--color-light-900);
+  background: var(--color-accent-900);
+}

@@ -1,23 +1,22 @@
+import { Checkbox } from '@/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Checkbox } from '@/ui'
-
 const meta = {
-  title: 'Components/Checkbox',
-  component: Checkbox,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {
-    labelTitle: 'Label Text',
     disabled: false,
+    labelTitle: 'Label Text',
   },
+  component: Checkbox,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Components/Checkbox',
 } satisfies Meta<typeof Checkbox>
 
 export default meta
@@ -37,7 +36,7 @@ export const WithLabel: Story = {
 
 export const Disabled: Story = {
   args: {
-    labelTitle: 'Disabled checkbox',
     disabled: true,
+    labelTitle: 'Disabled checkbox',
   },
 }

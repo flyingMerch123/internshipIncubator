@@ -1,2 +1,5 @@
 export * from './send-email-modal'
 export * from './notification-modal'
+export * from './confirmation-modal'
+export * from './create-new-post-modal/new-post-container-modal'
+export * from './create-new-post-modal'

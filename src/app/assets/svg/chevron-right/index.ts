@@ -1,3 +1,1 @@
-import { default as ChevronRight } from './ChevronRight'
-
-export { ChevronRight }
+export { default as ChevronRight } from './ChevronRight'

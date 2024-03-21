@@ -1,24 +1,24 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
 import { store } from '@/app/store/store'
 import { NewPasswordForm } from '@/modules/create-new-password-form'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'Auth/NewPasswordForm',
-  component: NewPasswordForm,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {},
+  component: NewPasswordForm,
   decorators: [
     Story => (
       <Provider store={store}>
-        <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Auth/NewPasswordForm',
 } satisfies Meta<typeof NewPasswordForm>
 
 export default meta

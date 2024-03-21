@@ -4,19 +4,19 @@ import { HomeMenuIcon, LogOutMenuIcon } from '@/app'
 import { MenuItem } from '@/ui'
 
 const meta = {
-  title: 'Navigation/MenuItem',
+  argTypes: {},
   component: MenuItem,
   decorators: [
     Story => (
       <div
-        style={{ margin: '3em', display: 'flex', justifyContent: 'center', listStyleType: 'none' }}
+        style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', margin: '3em' }}
       >
         <Story />
       </div>
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Navigation/MenuItem',
 } satisfies Meta<typeof MenuItem>
 
 export default meta
@@ -32,10 +32,10 @@ export const Default: Story = {
     Story => (
       <div
         style={{
-          height: '60vh',
-          display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
+          display: 'flex',
+          height: '60vh',
+          justifyContent: 'center',
           listStyleType: 'none',
         }}
       >
@@ -49,17 +49,17 @@ export const SidebarItemSelected: Story = {
   args: {
     href: '#',
     icon: HomeMenuIcon,
-    label: 'Home',
     isSelected: true,
+    label: 'Home',
   },
   decorators: [
     Story => (
       <div
         style={{
-          height: '60vh',
-          display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
+          display: 'flex',
+          height: '60vh',
+          justifyContent: 'center',
           listStyleType: 'none',
         }}
       >
@@ -71,19 +71,19 @@ export const SidebarItemSelected: Story = {
 
 export const SidebarItemDisabled: Story = {
   args: {
+    disabled: true,
     href: '#',
     icon: HomeMenuIcon,
     label: 'Home',
-    disabled: true,
   },
   decorators: [
     Story => (
       <div
         style={{
-          height: '60vh',
-          display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
+          display: 'flex',
+          height: '60vh',
+          justifyContent: 'center',
           listStyleType: 'none',
         }}
       >
@@ -103,10 +103,10 @@ export const SidebarItemOnlyLabel: Story = {
     Story => (
       <div
         style={{
-          height: '60vh',
-          display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
+          display: 'flex',
+          height: '60vh',
+          justifyContent: 'center',
           listStyleType: 'none',
         }}
       >
@@ -119,18 +119,18 @@ export const SidebarItemOnlyLabel: Story = {
 export const SidebarItemAsButton: Story = {
   args: {
     as: 'button',
-    onClick: () => {},
     icon: LogOutMenuIcon,
     label: 'Log Out',
+    onClick: () => {},
   },
   decorators: [
     Story => (
       <div
         style={{
-          height: '60vh',
-          display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
+          display: 'flex',
+          height: '60vh',
+          justifyContent: 'center',
           listStyleType: 'none',
         }}
       >

@@ -1,0 +1,14 @@
+{
+  "en": {
+    "generalInformation": "General Information",
+    "devices": "Devices",
+    "accountManagement": "Account Management",
+    "myPayments": "My payments"
+  },
+  "ru": {
+    "generalInformation": "Общая Информация",
+    "devices": "Устройства",
+    "accountManagement": "Управление аккаунтом",
+    "myPayments": "Мои платежи"
+  }
+}

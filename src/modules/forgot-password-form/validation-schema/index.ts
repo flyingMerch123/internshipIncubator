@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { useTranslation } from '@/app/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export const useForgotPasswordForm = () => {
   const { t } = useTranslation()
@@ -16,8 +16,8 @@ export const useForgotPasswordForm = () => {
       .email({ message: `${email.validation.invalidEmail}` }),
     token: z
       .string({
-        required_error: `${token.validation.required}`,
         invalid_type_error: `${token.validation.required}`,
+        required_error: `${token.validation.required}`,
       })
       .trim()
       .nonempty(),
@@ -26,11 +26,11 @@ export const useForgotPasswordForm = () => {
   type ForgotPassFormType = z.infer<typeof ForgotPasswordSchema>
 
   return useForm<ForgotPassFormType>({
-    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
       email: '',
       token: '',
     },
     mode: 'all',
+    resolver: zodResolver(ForgotPasswordSchema),
   })
 }

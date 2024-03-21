@@ -1,3 +1,1 @@
-import { default as CloseIcon } from './close-icon-svg'
-
-export { CloseIcon }
+export { default as CloseIcon } from './close-icon-svg'

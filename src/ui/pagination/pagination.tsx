@@ -1,23 +1,23 @@
 import { FC, KeyboardEvent } from 'react'
 
-import { clsx } from 'clsx'
-
-import s from './pagination.module.scss'
-import { usePagination } from './usePagination'
-
 import { ChevronLeft, ChevronRight, useTranslation } from '@/app'
 import { Select, Typography } from '@/ui'
 import { ROWS_PER_PAGE } from '@/ui/pagination/constants'
 import { SelectVariant } from '@/ui/select/select-types'
+import { clsx } from 'clsx'
+
+import s from './pagination.module.scss'
+
+import { usePagination } from './usePagination'
 
 export type PaginationPropsType = {
-  currentPage: number
-  totalCount: number
-  pageSize: number
-  siblingCount: number
   className?: string
+  currentPage: number
   onPageChange: (page: number) => void
   onPageSizeChange: (pageSize: string) => void
+  pageSize: number
+  siblingCount: number
+  totalCount: number
 }
 export const Pagination: FC<PaginationPropsType> = props => {
   const {
@@ -25,20 +25,20 @@ export const Pagination: FC<PaginationPropsType> = props => {
   } = useTranslation()
 
   const {
-    onPageSizeChange,
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
     currentPage,
+    onPageChange,
+    onPageSizeChange,
     pageSize,
+    siblingCount = 1,
+    totalCount,
   } = props
   const DOTS = '\u2026'
   const paginationRange = usePagination({
-    currentPage,
-    totalCount,
-    siblingCount,
-    pageSize,
     DOTS,
+    currentPage,
+    pageSize,
+    siblingCount,
+    totalCount,
   })
 
   const lastPage = paginationRange[paginationRange.length - 1]
@@ -50,11 +50,11 @@ export const Pagination: FC<PaginationPropsType> = props => {
 
   const cNames = {
     container: clsx(s.container),
-    pages: clsx(s.pages),
-    page: clsx(s.page),
-    leftArrow: clsx(s.page, disabledLeft && s.disabled),
-    rightArrow: clsx(s.page, disableRight && s.disabled),
     dots: clsx(s.page, s.dots),
+    leftArrow: clsx(s.page, disabledLeft && s.disabled),
+    page: clsx(s.page),
+    pages: clsx(s.pages),
+    rightArrow: clsx(s.page, disableRight && s.disabled),
     rowsPerPage: clsx(s.rowsPerPage),
     select: clsx(s.select),
   }
@@ -92,16 +92,16 @@ export const Pagination: FC<PaginationPropsType> = props => {
     }
 
     return pageNumber === DOTS ? (
-      <div key={index} className={cNames.dots}>
+      <div className={cNames.dots} key={index}>
         <Typography variant={'regular-14'}>{DOTS}</Typography>
       </div>
     ) : (
       <div
-        tabIndex={0}
-        key={index}
-        onKeyDown={onKeyDownSpace}
         className={activePage}
+        key={index}
         onClick={setActivePage}
+        onKeyDown={onKeyDownSpace}
+        tabIndex={0}
       >
         {pageNumber}
       </div>
@@ -112,19 +112,19 @@ export const Pagination: FC<PaginationPropsType> = props => {
     <div className={cNames.container}>
       <div className={cNames.pages}>
         <div
-          tabIndex={leftTabIndex}
           className={cNames.leftArrow}
-          onKeyDown={onKeyDownSpaceLeft}
           onClick={onPrevious}
+          onKeyDown={onKeyDownSpaceLeft}
+          tabIndex={leftTabIndex}
         >
           <ChevronLeft />
         </div>
         {pages}
         <div
-          tabIndex={rightTabIndex}
           className={cNames.rightArrow}
-          onKeyDown={onKeyDownSpaceRight}
           onClick={onNext}
+          onKeyDown={onKeyDownSpaceRight}
+          tabIndex={rightTabIndex}
         >
           <ChevronRight />
         </div>
@@ -133,9 +133,9 @@ export const Pagination: FC<PaginationPropsType> = props => {
         <Typography variant={'regular-14'}>{pagination.show}</Typography>
         <Select
           className={cNames.select}
-          value={pageSize}
-          options={ROWS_PER_PAGE}
           onChange={onPageSizeChange}
+          options={ROWS_PER_PAGE}
+          value={pageSize}
           variant={SelectVariant.Pagination}
         />
         <Typography variant={'regular-14'}>{pagination.onPage}</Typography>

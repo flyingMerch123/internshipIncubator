@@ -1,18 +1,25 @@
 import { LocaleType } from '@/app/locales/ru'
 import {
+  AccountModel,
+  Calendar,
+  CharacterPageTextModel,
+  ConfirmationModal,
+  CreatePost,
   ForgotPasswordModel,
-  NavigationTextModel,
-  LinkExpiredModel,
+  GeneralSettingsModel,
   LinkConfirmationModel,
+  LinkExpiredModel,
+  NavigationTabsModel,
+  NavigationTextModel,
+  NewPasswordConfirmationRedirectionModel,
   NewPasswordModel,
+  PaginationTextModel,
+  PaymentsModal,
   PrivacyPolicyTextModel,
+  SidebarMenuModel,
   SignInTextModel,
   SignUpTextModel,
   TermsTextModel,
-  NewPasswordConfirmationRedirectionModel,
-  CharacterPageTextModel,
-  SidebarMenuModel,
-  PaginationTextModel,
 } from '@/app/locales/text-models'
 
 const navigation = NavigationTextModel.en
@@ -28,40 +35,59 @@ const signUp = SignUpTextModel.en
 const signIn = SignInTextModel.en
 const sidebarMenu = SidebarMenuModel.en
 const pagination = PaginationTextModel.en
+const calendar = Calendar.en
+const generalSettings = GeneralSettingsModel.en
+const navigationTabs = NavigationTabsModel.en
+const confirmationModal = ConfirmationModal.en
+const createPost = CreatePost.en
+const account = AccountModel.en
+const paymentsModal = PaymentsModal.en
 
 export const en: LocaleType = {
-  navigation: {
-    title: navigation.title,
-    menu: navigation.links,
-    header: navigation.language,
-  },
-  termsDescription: {
-    title: descriptionTerms.title,
-    description: descriptionTerms.description,
-    header: descriptionTerms.language,
-  },
-  privacyDescription: {
-    title: descriptionPrivacy.title,
-    description: descriptionPrivacy.description,
-  },
-  characterPage: characterPage,
-  newPasswordPage: newPasswordPage,
-  forgotPasswordPage: forgotPasswordPage,
-  linkExpiredPage: linkExpiredPage,
-  linkConfirmedPage: linkConfirmedPage,
-  newPasswordConfirmationRedirectionPage: newPasswordConfirmationRedirectionPage,
+  account: account,
   authPages: {
-    signUpPage: {
-      signUpForm: {
-        ...signUp,
-      },
-    },
     signInPage: {
       signInForm: {
         ...signIn,
       },
     },
+    signUpPage: {
+      signUpForm: {
+        ...signUp,
+      },
+    },
+  },
+  calendar: {
+    locale: calendar.localeMonth,
+    month: calendar.month,
+  },
+  characterPage: characterPage,
+  confirmationModal: confirmationModal,
+  createPost: createPost,
+  forgotPasswordPage: forgotPasswordPage,
+  linkConfirmedPage: linkConfirmedPage,
+  linkExpiredPage: linkExpiredPage,
+  navigation: {
+    header: navigation.language,
+    menu: navigation.links,
+    title: navigation.title,
+  },
+  newPasswordConfirmationRedirectionPage: newPasswordConfirmationRedirectionPage,
+  newPasswordPage: newPasswordPage,
+  pagination: pagination,
+  paymentsModal: paymentsModal,
+  privacyDescription: {
+    description: descriptionPrivacy.description,
+    title: descriptionPrivacy.title,
+  },
+  profileSettings: {
+    generalSettings,
+    navigation: navigationTabs,
   },
   sidebarMenu: sidebarMenu,
-  pagination: pagination,
+  termsDescription: {
+    description: descriptionTerms.description,
+    header: descriptionTerms.language,
+    title: descriptionTerms.title,
+  },
 }

@@ -1,0 +1,76 @@
+.container {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  max-height: 33.6rem;
+  padding: 2rem 2.4rem 1rem;
+
+  border: 1px solid transparent;
+  border-bottom-color: var(--color-dark-100);
+
+  transition: 0.5s all ease-in;
+
+  &::-webkit-scrollbar {
+    width: 0.2rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-dark-100);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 15%);
+    border-radius: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 75%);
+  }
+
+  &.hide {
+    height: 1rem;
+    padding: 0;
+    opacity: 0;
+    border: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &.show {
+    height: 20rem;
+    padding: 1rem 0;
+    opacity: 1;
+    border: none;
+
+    &::-webkit-scrollbar {
+      display: block;
+    }
+  }
+
+  .description {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .info {
+    .created {
+      color: var(--color-light-900);
+    }
+  }
+}
+
+.containerV2 {
+  padding: 1rem 0;
+  border: none;
+}
+
+.btn {
+  cursor: pointer;
+  align-self: flex-start;
+  color: var(--color-light-900);
+}

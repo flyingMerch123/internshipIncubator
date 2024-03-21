@@ -1,24 +1,24 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 
 import { store } from '@/app/store/store'
 import { LinkConfirmed } from '@/modules'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'Auth/LinkConfirmed',
-  component: LinkConfirmed,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {},
+  component: LinkConfirmed,
   decorators: [
     Story => (
       <Provider store={store}>
-        <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Auth/LinkConfirmed',
 } satisfies Meta<typeof LinkConfirmed>
 
 export default meta

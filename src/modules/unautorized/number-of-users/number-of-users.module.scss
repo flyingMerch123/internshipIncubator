@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 97.2rem;
+  height: 7.2rem;
+  margin-top: 2.4rem;
+  margin-bottom: 3.5rem;
+  padding: 1.2rem 2.4rem;
+
+  background: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 0.12rem;
+
+  .counter {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 20.3rem;
+    padding: 0.8rem 1.2rem 1rem;
+
+    background: var(--color-dark-700);
+    border: 1px solid var(--color-dark-300);
+    border-radius: 0.12rem;
+
+    .digit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 3rem;
+      padding: 1rem;
+
+      &:not(:last-child) {
+        border-right: 1px solid var(--color-dark-300);
+      }
+    }
+  }
+}

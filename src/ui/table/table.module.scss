@@ -1,0 +1,63 @@
+.table {
+  border-collapse: collapse;
+
+  width: 100%;
+
+  border-top: 0.06rem solid var(--color-dark-500);
+  border-right: 0.06rem solid var(--color-dark-500);
+  border-left: 0.06rem solid var(--color-dark-500);
+}
+
+.row {
+  min-height: 40px;
+
+  &:hover {
+    background: var(--color-dark-100);
+  }
+}
+
+.head {
+  width: 100%;
+  margin-left: 0.375rem;
+}
+
+.headCell {
+  cursor: pointer;
+  user-select: none;
+  gap: 0.625rem;
+  background: var(--color-dark-500);
+
+  &.noSort {
+    cursor: initial;
+  }
+}
+
+.dataCell {
+  padding: 0.38rem 1.5rem;
+  vertical-align: middle;
+  background: transparent;
+  border-bottom: 0.06rem solid var(--color-dark-500);
+}
+
+.title {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sortAscIcon {
+  transform: rotate(180deg);
+}
+
+.sortDscIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+}
+
+.checkbox {
+  margin: 0;
+  padding: 0;
+}

@@ -1,12 +1,12 @@
 # Stage 1: Dependencies
-FROM node:18.15 as dependencies
+FROM node:18.17 as dependencies
 WORKDIR /app
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # Stage 2: Builder
-FROM node:18.15 as builder
+FROM node:18.17 as builder
 WORKDIR /app
 RUN npm install -g pnpm
 COPY . .
@@ -15,7 +15,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN pnpm run build:production
 
 # Stage 3: Runner
-FROM node:18.15 as runner
+FROM node:18.17 as runner
 WORKDIR /app
 RUN npm install -g pnpm
 ENV NODE_ENV production

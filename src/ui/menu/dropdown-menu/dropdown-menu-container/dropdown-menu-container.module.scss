@@ -3,11 +3,11 @@
   --animation-delay: 50ms;
 
   position: relative;
+  z-index: 5;
 
   display: inline-block;
 
   height: 6rem;
-  margin-left: 1.2rem;
 
   -webkit-tap-highlight-color: transparent;
 
@@ -23,9 +23,11 @@
     align-items: center;
     justify-content: space-around;
 
-    width: 2.4rem;
+    width: 3.6rem;
     height: 1rem;
-    padding: 3rem 0 2rem;
+    padding: 3rem 0 2rem 1.2rem;
+
+    caret-color: transparent;
 
     & p {
       width: 0.4rem;
@@ -48,9 +50,9 @@
     overflow: hidden;
 
     width: 16.1rem;
-    min-height: 20.4rem;
-    padding: 1.8rem 0 1.2rem 1.2rem;
+    padding: 1.2rem;
 
+    visibility: hidden;
     opacity: 0;
     background-color: var(--bg-color-secondary);
     border: 0.1rem solid var(--text-color-disabled);
@@ -89,6 +91,20 @@
 
         animation: fade-in var(--animation-duration) linear forwards;
 
+        &:hover {
+          span,
+          svg {
+            color: var(--color-accent-100);
+          }
+        }
+
+        &:active {
+          span,
+          svg {
+            color: var(--color-accent-500);
+          }
+        }
+
         &:first-child {
           animation-delay: calc(var(--animation-delay));
         }
@@ -111,6 +127,7 @@
   @keyframes fade-in {
     to {
       transform: translateY(0);
+      visibility: visible;
       opacity: 1;
     }
   }

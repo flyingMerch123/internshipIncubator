@@ -23,9 +23,19 @@
 
   border-radius: 2px;
   outline: 2px solid transparent;
+  caret-color: transparent;
 
   &:focus-visible {
     outline: 2px solid var(--color-accent-700);
+  }
+
+  &:hover {
+    color: var(--color-light-100);
+    background: var(--color-accent-100);
+  }
+
+  &:active {
+    background: var(--color-accent-700);
   }
 
   &:disabled {
@@ -88,6 +98,7 @@
 
   &:hover {
     color: var(--color-accent-100);
+    background-color: initial;
     outline: 1px solid var(--color-accent-100);
   }
 
@@ -102,8 +113,8 @@
   }
 
   &:active:enabled {
-    color: var(--color-accent-100);
-    background: var(--color-accent-700);
+    color: var(--color-accent-700);
+    background-color: initial;
     outline: 1px solid var(--color-accent-700);
   }
 }
@@ -112,10 +123,11 @@
   @include button-mixin;
 
   color: var(--color-accent-500);
-  background: transparent;
+  background-color: transparent;
 
   &:hover {
     color: var(--color-accent-100);
+    background-color: inherit;
   }
 
   &:active {

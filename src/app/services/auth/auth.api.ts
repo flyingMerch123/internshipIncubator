@@ -1,95 +1,141 @@
 import { authApiUrls } from '@/app/constants/routes/auth'
 import {
-  Code,
   NewPasswordCredentials,
+  PasswordRecovery,
   SignInCredentials,
-  UserCredentials,
+  UserModel,
+  UserRegistrationParams,
 } from '@/app/services/auth/auth.api.types'
 import { commonApi } from '@/app/services/common/common.api'
-import { GoogleUser } from '@/app/services/google/google.api.types'
+
+const {
+  checkRecoveryCode,
+  createNewPassword,
+  getMe,
+  loginGithubOAuth,
+  loginGoogleOAuth,
+  passwordRecovery,
+  refreshMe,
+  registrationConfirmation,
+  resendEmail,
+  signIn,
+  signOut,
+  signUp,
+} = authApiUrls
 
 export const authAPI = commonApi.injectEndpoints({
   endpoints: builder => ({
-    getMe: builder.query<any, void>({
-      query: () => {
+    checkRecoveryCode: builder.mutation<{ email: string }, { recoveryCode: string }>({
+      query: ({ recoveryCode }) => {
         return {
-          method: 'GET',
-          url: authApiUrls.getMe(),
-        }
-      },
-      extraOptions: { maxRetries: 0 },
-      providesTags: ['ME'],
-    }),
-    signUp: builder.mutation<void, UserCredentials>({
-      query: args => {
-        return {
+          body: { recoveryCode },
           method: 'POST',
-          url: authApiUrls.signUp(),
-          body: args,
-        }
-      },
-    }),
-    resendEmail: builder.mutation<void, Code>({
-      query: code => {
-        return {
-          method: 'POST',
-          url: authApiUrls.resendEmail(),
-          body: code,
-        }
-      },
-    }),
-    confirmAccount: builder.query<void, Code>({
-      query: code => {
-        return {
-          method: 'GET',
-          url: authApiUrls.registrationConfirmation(),
-          params: code,
-        }
-      },
-    }),
-    passwordRecovery: builder.mutation<void, { email: string }>({
-      query: email => {
-        return {
-          method: 'POST',
-          url: authApiUrls.passwordRecovery(),
-          body: email,
+          url: checkRecoveryCode(),
         }
       },
     }),
     createNewPassword: builder.mutation<void, NewPasswordCredentials>({
-      query: ({ newPassword, token }) => {
+      query: args => {
+        return {
+          body: args,
+          method: 'POST',
+          url: createNewPassword(),
+        }
+      },
+    }),
+    emailConfirmation: builder.mutation<
+      void,
+      {
+        confirmationCode: string
+      }
+    >({
+      query: code => {
+        return {
+          body: { confirmationCode: code.confirmationCode },
+          method: 'POST',
+          url: registrationConfirmation(),
+        }
+      },
+    }),
+    getMe: builder.query<UserModel, void>({
+      extraOptions: { maxRetries: 0 },
+      providesTags: ['ME'],
+      query: () => {
+        return {
+          method: 'GET',
+          url: getMe(),
+        }
+      },
+    }),
+    githubOAuth: builder.query<void, void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: loginGithubOAuth(),
+        }
+      },
+    }),
+    googleOAuth: builder.mutation<
+      {
+        accessToken: string
+        email: string
+      },
+      { code: string }
+    >({
+      query: user => {
+        return {
+          body: user,
+          method: 'POST',
+          url: loginGoogleOAuth(),
+        }
+      },
+    }),
+    passwordRecovery: builder.mutation<void, PasswordRecovery>({
+      query: args => {
+        return {
+          body: args,
+          method: 'POST',
+          url: passwordRecovery(),
+        }
+      },
+    }),
+    refreshMe: builder.mutation<{ accessToken: string }, void>({
+      query: () => {
         return {
           method: 'POST',
-          url: authApiUrls.createNewPassword(),
-          body: { newPassword },
-          params: { token },
+          url: refreshMe(),
+        }
+      },
+    }),
+
+    resendEmail: builder.mutation<
+      void,
+      {
+        baseUrl: string
+        email: string
+      }
+    >({
+      query: code => {
+        return {
+          body: code,
+          method: 'POST',
+          url: resendEmail(),
         }
       },
     }),
     signIn: builder.mutation<{ accessToken: string }, SignInCredentials>({
+      invalidatesTags: ['ME'],
       query: args => {
         return {
-          method: 'POST',
-          url: authApiUrls.signIn(),
           body: args,
+          method: 'POST',
+          url: signIn(),
         }
       },
+    }),
 
-      invalidatesTags: ['ME'],
-    }),
-    refreshMe: builder.query<{ accessToken: string }, void>({
-      query: () => {
-        return {
-          method: 'GET',
-          url: authApiUrls.refreshMe(),
-        }
-      },
-    }),
     signOut: builder.mutation<void, void>({
-      query: () => ({
-        method: 'POST',
-        url: authApiUrls.logout(),
-      }),
+      invalidatesTags: ['ME'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         dispatch(
           authAPI.util.updateQueryData('getMe', undefined, () => {
@@ -104,49 +150,34 @@ export const authAPI = commonApi.injectEndpoints({
           //patchResult.undo()
         }
       },
+      query: () => ({
+        method: 'POST',
+        url: signOut(),
+      }),
     }),
 
-    googleAuth: builder.mutation<any, GoogleUser>({
-      query: user => {
+    signUp: builder.mutation<void, UserRegistrationParams>({
+      query: args => {
         return {
+          body: args,
           method: 'POST',
-          url: authApiUrls.signWithGoogle(),
-          body: user,
-        }
-      },
-    }),
-    googleOAuthPage: builder.query<void, void>({
-      query: user => {
-        return {
-          method: 'GET',
-          url: authApiUrls.googleOAuthPage(),
-          body: user,
-        }
-      },
-    }),
-
-    githubOAuthPage: builder.query<void, void>({
-      query: () => {
-        return {
-          method: 'GET',
-          url: authApiUrls.githubOAuthPage(),
+          url: signUp(),
         }
       },
     }),
   }),
+  overrideExisting: true,
 })
 
 export const {
-  useConfirmAccountQuery,
-  usePasswordRecoveryMutation,
+  useCheckRecoveryCodeMutation,
   useCreateNewPasswordMutation,
-  useRefreshMeQuery,
-  useResendEmailMutation,
-  useSignOutMutation,
+  useEmailConfirmationMutation,
   useGetMeQuery,
-  useSignUpMutation,
+  usePasswordRecoveryMutation,
+  useRefreshMeMutation,
+  useResendEmailMutation,
   useSignInMutation,
-  useGithubOAuthPageQuery,
-  useGoogleOAuthPageQuery,
-  useGoogleAuthMutation,
+  useSignOutMutation,
+  useSignUpMutation,
 } = authAPI

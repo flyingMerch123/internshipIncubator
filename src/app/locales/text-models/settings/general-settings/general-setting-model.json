@@ -1,0 +1,170 @@
+{
+  "en": {
+    "profile": {
+      "btn": {
+        "label": "Profile Settings"
+      },
+      "following": {
+        "label": "Following"
+      },
+      "followers": {
+        "label": "Followers"
+      },
+      "publications": {
+        "label": "Publications"
+      }
+    },
+    "profileImage": {
+      "btn": {
+        "label": "Add a Profile Photo"
+      },
+      "modal": {
+        "label": "Add a Profile Photo",
+        "btn": {
+          "label": "Select from Computer"
+        },
+        "submitBtn": {
+          "label": "Save"
+        }
+      },
+      "errors": {
+        "format": {
+          "text": "The format of the uploaded photo must be",
+          "preposition": "or"
+        },
+        "size": "Photo size must be less than"
+      }
+    },
+    "username": {
+      "label": "Username",
+      "validation": {
+        "required": "Enter Username",
+        "length": "Username must be at least 6 characters",
+        "maxLength": "Username must be less than 30 characters",
+        "pattern": "Username should only contain alphanumeric characters, hyphens, and underscores"
+      }
+    },
+    "firstName": {
+      "label": "First Name",
+      "validation": {
+        "required": "Enter First Name",
+        "length": "First Name must be at least 2 characters",
+        "maxLength": "First Name must be less than 20 characters",
+        "pattern": "First Name should only contain alphabetic characters"
+      }
+    },
+    "lastName": {
+      "label": "Last Name",
+      "validation": {
+        "required": "Last Name",
+        "length": "Last Name must be at least 2 characters",
+        "maxLength": "Last Name must be less than 20 characters",
+        "pattern": "Last Name should only contain alphabetic characters"
+      }
+    },
+    "birthday": {
+      "label": "Date of birth",
+      "validation": {
+        "error": "A user under 13 cannot create a profile. <1>Privacy Policy</1>",
+        "linkLabel": "Privacy Policy"
+      }
+    },
+    "country": {
+      "label": "Select your country"
+    },
+    "city": {
+      "label": "Select your city"
+    },
+    "aboutMe": {
+      "label": "About me",
+      "placeholder": "Please provide information here..."
+    },
+    "submitFormBtn": {
+      "label": "Save Changes"
+    }
+  },
+  "ru": {
+    "profile": {
+      "btn": {
+        "label": "Настройки профиля"
+      },
+      "following": {
+        "label": "Подписки"
+      },
+      "followers": {
+        "label": "Подписчики"
+      },
+      "publications": {
+        "label": "Публикации"
+      }
+    },
+    "profileImage": {
+      "btn": {
+        "label": "Добавить фото"
+      },
+      "modal": {
+        "label": "Добавить фото",
+        "btn": {
+          "label": "Выбрать с компьютера"
+        },
+        "submitBtn": {
+          "label": "Сохранить"
+        }
+      },
+      "errors": {
+        "format": {
+          "text": "Формат загружаемых фото должен быть",
+          "preposition": "или"
+        },
+        "size": "Размер фото должен быть меньше чем"
+      }
+    },
+    "username": {
+      "label": "Имя пользователя",
+      "validation": {
+        "required": "Введите имя пользователя",
+        "length": "Имя пользователя должно содержать не менее 6 символов",
+        "maxLength": "Имя пользователя должно содержать не более 30 символов",
+        "pattern": "Имя пользователя должно содержать только буквы, цифры, дефисы и подчеркивания"
+      }
+    },
+    "firstName": {
+      "label": "Ваше Имя",
+      "validation": {
+        "required": "Введите ваше имя",
+        "length": "Ваше имя должно содержать не менее 2 символов",
+        "maxLength": "Ваше имя должно содержать не более 30 символов",
+        "pattern": "Ваше имя должно содержать только буквы"
+      }
+    },
+    "lastName": {
+      "label": "Ваша Фамилия",
+      "validation": {
+        "required": "Введите вашу фамилию",
+        "length": "Ваша Фамилия должна содержать не менее 2 символов",
+        "maxLength": "Ваша Фамилия должна содержать не более 30 символов",
+        "pattern": "Ваша Фамилия должна содержать только буквы"
+      }
+    },
+    "birthday": {
+      "label": "Дата рождения",
+      "validation": {
+        "error": "Пользователь младше 13 лет не может создать профиль. <1>Политика конфиденциальности</1>",
+        "linkLabel": "Политика конфиденциальности"
+      }
+    },
+    "country": {
+      "label": "Выберите вашу страну"
+    },
+    "city": {
+      "label": "Выберите ваш город"
+    },
+    "aboutMe": {
+      "label": "Обо мне",
+      "placeholder": "Пожалуйста, напишите что нибудь о себе..."
+    },
+    "submitFormBtn": {
+      "label": "Сохранить изменения"
+    }
+  }
+}

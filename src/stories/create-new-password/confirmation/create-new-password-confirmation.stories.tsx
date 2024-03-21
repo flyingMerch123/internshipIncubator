@@ -1,20 +1,19 @@
+import { NewPasswordConfirmationRedirection } from '@/modules/create-new-password-form'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { NewPasswordConfirmationRedirection } from '@/modules/create-new-password-form'
-
 const meta = {
-  title: 'Auth/NewPasswordConfirmation',
-  component: NewPasswordConfirmationRedirection,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {},
+  component: NewPasswordConfirmationRedirection,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Auth/NewPasswordConfirmation',
 } satisfies Meta<typeof NewPasswordConfirmationRedirection>
 
 export default meta

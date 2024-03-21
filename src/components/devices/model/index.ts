@@ -11,8 +11,8 @@ const BROWSERS = {
   FIREFOX: 'FIREFOX',
   OPERA: 'OPERA',
   SAFARI: 'SAFARI',
-  YANDEX: 'YANDEX',
   UC: 'UC',
+  YANDEX: 'YANDEX',
 } as const
 
 type ObjectValuesType<T> = T[keyof T]
@@ -20,5 +20,3 @@ type ObjectValuesType<T> = T[keyof T]
 export type SessionDeviceType = ObjectValuesType<typeof SESSION_DEVICES>
 
 export type BrowserType = ObjectValuesType<typeof BROWSERS>
-
-export type Nullable<T> = T | null

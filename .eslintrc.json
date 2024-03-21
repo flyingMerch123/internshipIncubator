@@ -5,6 +5,7 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
+    "max-lines": "warn",
     "no-console": [
       "warn",
       {

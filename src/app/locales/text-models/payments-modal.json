@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "error": "Ошибка",
+    "success": "Успешно",
+    "failed": "Операция прервана. Обратитесь, пожалуйста, в службу поддержки",
+    "successful": "Платеж завершен!",
+    "back": "Вернуться к оплате"
+  },
+  "en": {
+    "error": "Error",
+    "success": "Success",
+    "failed": "Transaction failed. Please, write to support",
+    "successful": "Payment was successful!",
+    "back": "Back to payment"
+  }
+}

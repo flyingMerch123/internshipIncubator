@@ -1,26 +1,26 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useRef } from 'react'
 
+import { useDisclose, useOnClickOutside } from '@/app'
 import { clsx } from 'clsx'
-import { useRouter } from 'next/router'
 
 import s from './dropdown-menu-container.module.scss'
 
-export const DropdownMenuContainer = ({ children }: PropsWithChildren) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { pathname } = useRouter()
+export type MenuProps = PropsWithChildren<{
+  menuStyle?: string
+}>
 
-  useEffect(() => {
-    return () => setIsOpen(false)
-  }, [pathname])
+export const DropdownMenuContainer = ({ children, menuStyle }: MenuProps) => {
+  const { isOpen: isMenuOpen, onClose: closeMenu, onOpen: openMenu } = useDisclose()
+  const menuRef = useRef<HTMLDivElement>(null)
 
-  const clickHandler = () => {
-    setIsOpen(prev => !prev)
-  }
+  useOnClickOutside(menuRef, closeMenu)
+
+  const clickHandler = () => openMenu()
 
   const styles = {
-    dot: clsx(s.dot, isOpen && s.active),
-    menu: clsx(s.list, isOpen && s.fade),
-    list: clsx(isOpen && s.active),
+    dot: clsx(s.dot, isMenuOpen && s.active),
+    list: clsx(isMenuOpen && s.active, menuStyle),
+    menu: clsx(s.list, isMenuOpen && s.fade),
   }
 
   return (
@@ -30,7 +30,8 @@ export const DropdownMenuContainer = ({ children }: PropsWithChildren) => {
         <p className={styles.dot}></p>
         <p className={styles.dot}></p>
       </div>
-      <div className={styles.menu}>
+
+      <div className={styles.menu} ref={menuRef}>
         <ul className={styles.list}>{children}</ul>
       </div>
     </nav>

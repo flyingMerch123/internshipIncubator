@@ -1,10 +1,10 @@
 import { RefAttributes } from 'react'
-
-import { clsx } from 'clsx'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { RecaptchaProps } from '@/ui/recaptcha/recaptcha'
+import { clsx } from 'clsx'
+
 import s from '@/ui/recaptcha/recaptcha.module.scss'
 
 type ControlledRecaptchaProps<T extends FieldValues> = UseControllerProps<T> &
@@ -12,29 +12,29 @@ type ControlledRecaptchaProps<T extends FieldValues> = UseControllerProps<T> &
   RefAttributes<ReCAPTCHA>
 
 export const ControlledReCaptcha = <T extends FieldValues>({
-  name,
-  rules,
-  shouldUnregister,
   control,
   defaultValue,
   error,
+  name,
   ref,
+  rules,
+  shouldUnregister,
   ...recaptchaProps
 }: ControlledRecaptchaProps<T>) => {
   const {
     field: { onChange },
   } = useController({
+    control,
+    defaultValue,
     name,
     rules,
     shouldUnregister,
-    control,
-    defaultValue,
   })
 
   const style = {
-    wrapper: clsx(error && s.wrapper),
-    recaptcha: clsx(s.recaptcha),
     error: clsx(error && s.error),
+    recaptcha: clsx(s.recaptcha),
+    wrapper: clsx(error && s.wrapper),
   }
 
   return (

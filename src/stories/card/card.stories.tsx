@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from '@/ui'
 
 const meta = {
-  title: 'Components/Card',
+  argTypes: {},
   component: Card,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
@@ -18,7 +18,7 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Components/Card',
 } satisfies Meta<typeof Card>
 
 export default meta

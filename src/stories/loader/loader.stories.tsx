@@ -1,20 +1,19 @@
+import { Loader } from '@/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Loader } from '@/ui'
-
 const meta = {
-  title: 'Components/Loader',
-  component: Loader,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {},
+  component: Loader,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Components/Loader',
 } satisfies Meta<typeof Loader>
 
 export default meta

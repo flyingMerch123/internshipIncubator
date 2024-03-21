@@ -1,1 +1,1 @@
-export { HeaderLayout } from './header-layout'
+export * from './header-layout'

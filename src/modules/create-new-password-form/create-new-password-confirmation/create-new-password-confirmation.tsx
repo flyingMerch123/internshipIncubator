@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react'
 
+import { useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { Typography } from '@/ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import s from './create-new-password-confirmation.module.scss'
-
-import { authNavigationUrls, useTranslation } from '@/app'
-import { Typography } from '@/ui'
 
 type ConfirmationProps = {
   delay?: number
@@ -16,7 +16,7 @@ export const NewPasswordConfirmationRedirection: FC<ConfirmationProps> = ({ dela
   const router = useRouter()
   const { t } = useTranslation()
 
-  const { message, title, link: label } = t.newPasswordConfirmationRedirectionPage
+  const { link: label, message, title } = t.newPasswordConfirmationRedirectionPage
 
   useEffect(() => {
     const timer = setTimeout(() => router.push(authNavigationUrls.signIn()), delay)
@@ -33,7 +33,7 @@ export const NewPasswordConfirmationRedirection: FC<ConfirmationProps> = ({ dela
       <div className={s.message}>
         <Typography as={'h2'} variant={'h2'}>
           {`${message} -   `}
-          <Link href={authNavigationUrls.signIn()} className={s.link}>
+          <Link className={s.link} href={authNavigationUrls.signIn()}>
             {label}
           </Link>
         </Typography>

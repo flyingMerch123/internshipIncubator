@@ -1,23 +1,27 @@
+import { authApiUrls } from '@/app/constants'
+import { getFromSessionStorage, setToSessionStorage } from '@/app/utils'
 import {
   BaseQueryFn,
-  createApi,
   FetchArgs,
-  fetchBaseQuery,
   FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
 } from '@reduxjs/toolkit/dist/query/react'
 import { Mutex } from 'async-mutex'
+import { HYDRATE } from 'next-redux-wrapper'
 
-import { authActions } from '@/app/services/auth/auth.slice'
-import { RootState } from '@/app/store/store'
+const { refreshMe, signOut } = authApiUrls
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://flying-merch.vercel.app/',
+  baseUrl: process.env.BASE_API_URL,
   credentials: 'include',
-  prepareHeaders: (headers, api) => {
-    const token = (api.getState() as RootState).auth.accessToken
+  prepareHeaders: headers => {
+    if (typeof window !== 'undefined') {
+      const token = getFromSessionStorage('accessToken', null)
 
-    if (token) {
-      headers.set('authorization', `${token}`)
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
     }
 
     return headers
@@ -25,7 +29,7 @@ const baseQuery = fetchBaseQuery({
 })
 
 const mutex = new Mutex()
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError> = async (
   args,
   api,
   extraOptions
@@ -33,7 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result.error && result.error.status === 401) {
+  if (result?.meta?.response?.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
 
@@ -41,26 +45,19 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         const refreshResult = await baseQuery(
           {
             method: 'POST',
-            url: '/api/auth/new-tokens',
+            url: refreshMe(),
           },
           api,
           extraOptions
         )
 
         if (refreshResult.meta?.response?.status === 200) {
-          if (refreshResult?.data) {
-            api.dispatch(
-              authActions.setToken({
-                data: refreshResult.data,
-              })
-            )
-          }
           result = await baseQuery(args, api, extraOptions)
         } else {
           await baseQuery(
             {
-              url: '/api/auth/logout',
               method: 'POST',
+              url: signOut(),
             },
             api,
             extraOptions
@@ -74,13 +71,31 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result = await baseQuery(args, api, extraOptions)
     }
   }
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line no-prototype-builtins
+    if ((result?.data as { accessToken?: string })?.hasOwnProperty('accessToken')) {
+      setToSessionStorage('accessToken', (result.data as { accessToken: string }).accessToken)
+    }
+    if (result?.meta?.request.url === process.env.BASE_API_URL + signOut()) {
+      sessionStorage.removeItem('accessToken')
+    }
+  }
 
   return result
 }
 
 export const commonApi = createApi({
-  reducerPath: 'commonApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['ME'],
   endpoints: () => ({}),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath]
+    }
+  },
+  reducerPath: 'commonApi',
+  tagTypes: ['ME', 'Profile', 'Posts', 'Images', 'Subscriptions', 'Sessions'],
 })
+
+export const {
+  util: { getRunningQueriesThunk },
+} = commonApi

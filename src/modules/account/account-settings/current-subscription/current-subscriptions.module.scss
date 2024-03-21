@@ -1,0 +1,16 @@
+.container {
+  gap: 4.2rem;
+
+  .currentSubscriptionCard {
+    display: flex;
+    flex-direction: row;
+    gap: 4.8rem;
+    margin-top: 0.6rem;
+    padding: 1.2rem 2.4rem 1.2rem 2rem;
+
+    .text {
+      color: var(--color-light-900);
+      margin-bottom: 1.2rem;
+    }
+  }
+}

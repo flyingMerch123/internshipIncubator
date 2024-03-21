@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { SendEmailModal } from '@/components'
 
 const meta: Meta<typeof SendEmailModal> = {
-  title: 'Components/SendEmailModal',
+  argTypes: {},
   component: SendEmailModal,
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Components/SendEmailModal',
 }
 
 export default meta

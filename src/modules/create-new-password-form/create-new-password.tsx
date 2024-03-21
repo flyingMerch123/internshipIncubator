@@ -1,20 +1,20 @@
-import { useState } from 'react'
-
+import { ErrorWithData, useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { useCreateNewPasswordMutation } from '@/app/services/auth/auth.api'
+import { showError } from '@/app/utils'
+import { useNewPasswordForm } from '@/modules/create-new-password-form/validation-schema'
+import { Button, Card, Loader, TextField, Typography } from '@/ui'
 import { useRouter } from 'next/router'
 
 import s from './create-new-password.module.scss'
 
-import { authNavigationUrls, useTranslation } from '@/app'
-import { useNewPasswordForm } from '@/modules/create-new-password-form/validation-schema'
-import { Button, Card, Loader, TextField, Typography } from '@/ui'
-
-export const NewPasswordForm = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+export const NewPasswordForm = ({ code }: { code?: string }) => {
+  const [sendNewPassword, { isLoading }] = useCreateNewPasswordMutation()
   const router = useRouter()
 
   const { t } = useTranslation()
 
-  const { title, password, passwordConfirmation, description, button } = t.newPasswordPage
+  const { button, description, password, passwordConfirmation, title } = t.newPasswordPage
 
   const {
     formState: { errors, isValid },
@@ -26,43 +26,54 @@ export const NewPasswordForm = () => {
   const setNewPassword = handleSubmit((data, e?) => {
     e?.preventDefault()
 
-    setIsLoading(true)
-
-    setTimeout(() => {
-      void router.push(authNavigationUrls.newPasswordConfirmation())
-
-      setIsLoading(false)
-      reset()
-    }, 1500)
+    sendNewPassword({ newPassword: data.password, recoveryCode: code || '' })
+      .unwrap()
+      .then(() => {
+        void router.push(authNavigationUrls.newPasswordConfirmation())
+        reset()
+      })
+      .catch((error: ErrorWithData) => {
+        showError(error)
+        // {
+        //   /*TODO: we need back implementation to case if recovery code expired*/
+        // }
+        // if (
+        //   error?.data?.errorsMessages &&
+        //   error.data.errorsMessages[0].message ===
+        //     'Confirmation or Recovery code should be exist and actually'
+        // ) {
+        //   void router.push(authNavigationUrls.newPasswordConfirmation())
+        // }
+      })
   })
 
   return (
     <Card className={s.card}>
-      <Typography as={'h1'} variant={'h1'} className={s.title}>
+      <Typography as={'h1'} className={s.title} variant={'h1'}>
         {title}
       </Typography>
       <form onSubmit={setNewPassword}>
         <TextField
           {...register('password')}
-          label={password.label}
-          inputType={'password'}
           className={s.email}
           error={errors?.password?.message}
+          inputType={'password'}
+          label={password.label}
         />
 
         <TextField
           {...register('confirmPassword')}
-          label={passwordConfirmation.label}
-          inputType={'password'}
           className={s.confirmation}
           error={errors?.confirmPassword?.message}
+          inputType={'password'}
+          label={passwordConfirmation.label}
         />
-        <Typography as={'p'} variant={'regular-14'} className={s.description}>
+        <Typography as={'p'} className={s.description} variant={'regular-14'}>
           {description}
         </Typography>
 
-        <Button fullWidth className={s.button} type={'submit'} disabled={!isValid}>
-          {isLoading ? <Loader /> : button.submit}
+        <Button className={s.button} disabled={!isValid} fullWidth type={'submit'}>
+          {isLoading ? <Loader isLoading /> : button.submit}
         </Button>
       </form>
     </Card>

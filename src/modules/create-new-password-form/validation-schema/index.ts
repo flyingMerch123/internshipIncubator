@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { useTranslation } from '@/app/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export const useNewPasswordForm = () => {
   const { t } = useTranslation()
@@ -10,6 +10,9 @@ export const useNewPasswordForm = () => {
 
   const NewPasswordSchema = z
     .object({
+      confirmPassword: z
+        .string({ required_error: `${passwordConfirmation.validation.required}` })
+        .trim(),
       password: z
         .string({ required_error: `${password.validation.required}` })
         .trim()
@@ -19,9 +22,6 @@ export const useNewPasswordForm = () => {
           /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*[а-яА-Я])(?!.* ).{6,20}$/,
           `${password.validation.pattern}`
         ),
-      confirmPassword: z
-        .string({ required_error: `${passwordConfirmation.validation.required}` })
-        .trim(),
     })
     .refine(data => data.password === data.confirmPassword, {
       message: `${passwordConfirmation.validation.required}`,
@@ -31,11 +31,11 @@ export const useNewPasswordForm = () => {
   type NewPassFormType = z.infer<typeof NewPasswordSchema>
 
   return useForm<NewPassFormType>({
-    resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
-      password: '',
       confirmPassword: '',
+      password: '',
     },
     mode: 'all',
+    resolver: zodResolver(NewPasswordSchema),
   })
 }

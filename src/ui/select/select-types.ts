@@ -1,23 +1,23 @@
-import { ComponentPropsWithoutRef, CSSProperties, ReactElement } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, ReactElement } from 'react'
 
 export enum SelectVariant {
-  Primary = 'primary',
-  Pagination = 'pagination',
   Language = 'language',
   LanguageMobile = 'language-mobile',
+  Pagination = 'pagination',
+  Primary = 'primary',
 }
 
-type ObjectOption = { label: string | ReactElement; value: string }
+type ObjectOption = { label: ReactElement | string; value: string }
 
 type CommonProps = {
-  value: string | number | ReactElement
-  onChange: (value: string) => void
-  placeholder?: string | ReactElement
-  variant?: SelectVariant
-  options: Array<ObjectOption | string>
   label?: string
-  width?: CSSProperties['width']
-  rootClassName?: string
+  onChange: (value: string) => void
   open?: boolean
+  options: Array<ObjectOption | string>
+  placeholder?: ReactElement | string
+  rootClassName?: string
+  value: ReactElement | number | string
+  variant?: SelectVariant
+  width?: CSSProperties['width']
 }
 export type SelectModel = Omit<ComponentPropsWithoutRef<'select'>, keyof CommonProps> & CommonProps

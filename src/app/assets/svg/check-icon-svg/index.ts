@@ -1,3 +1,1 @@
-import { default as CheckIcon } from './check-icon'
-
-export { CheckIcon }
+export { default as CheckIcon } from './check-icon'

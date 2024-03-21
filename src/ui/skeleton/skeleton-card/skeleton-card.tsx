@@ -3,22 +3,22 @@ import { PropsWithChildren } from 'react'
 import { Skeleton } from '@/ui/skeleton/skeleton'
 
 type SkeletonCardProps = {
-  count?: number
   circle?: boolean
   className?: string
+  count?: number
 }
 export const SkeletonCard = ({
-  count = 1,
+  children,
   circle = false,
   className,
-  children,
+  count = 1,
 }: PropsWithChildren<SkeletonCardProps>) => {
   const amount: Array<number> = Array(count).fill(1)
 
   return (
     <>
       {amount?.map((_, index) => (
-        <Skeleton key={index} circle={circle} className={className}>
+        <Skeleton circle={circle} className={className} key={index}>
           {children}
         </Skeleton>
       ))}

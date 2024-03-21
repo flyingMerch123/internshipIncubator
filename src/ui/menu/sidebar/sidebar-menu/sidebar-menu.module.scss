@@ -1,16 +1,16 @@
 .container {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-
-  width: 22rem;
-  height: 100vh;
+  height: calc(100lvh - 6rem);
   padding: 7.2rem 0 3.6rem 6rem;
 
   background-color: var(--bg-color-primary);
   border: 1px solid transparent;
   border-right-color: #333;
+
+  transition: 0.6s all ease-in;
+
+  @media (width <= 1200px) {
+    padding-top: 3.6rem;
+  }
 }
 
 .menu {
@@ -19,13 +19,22 @@
 
   & li {
     margin-bottom: 2.6rem;
+    transition: 0.6s all ease-in;
   }
 
   & li:nth-child(5) {
     margin-bottom: 6rem;
+
+    @media (width <= 1200px) {
+      margin-bottom: 4rem;
+    }
   }
 
   & li:nth-child(7) {
-    margin-bottom: 18rem;
+    margin-bottom: 16rem;
+
+    @media (width <= 1200px) {
+      margin-bottom: 6rem;
+    }
   }
 }

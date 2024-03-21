@@ -1,0 +1,50 @@
+.dotButtons {
+  position: absolute;
+  z-index: 10;
+  bottom: 0.5rem;
+  left: 50%;
+  translate: -50%;
+
+  display: flex;
+
+  height: 2.4rem;
+  padding: 0.2rem;
+
+  opacity: 0.5;
+  background-color: var(--color-dark-300);
+  border-radius: 0.2rem;
+
+  transition: opacity 300ms ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .dotButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    height: 2rem;
+
+    .dot {
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: white;
+      border-radius: 50%;
+
+      &.isActive {
+        background-color: var(--color-accent-500);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .dot {
+        background-color: var(--color-accent-100);
+      }
+    }
+  }
+}

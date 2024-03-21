@@ -1,35 +1,34 @@
 import { ComponentPropsWithoutRef, ElementType, Fragment } from 'react'
 
+import { SVGIconType } from '@/app'
+import { Typography } from '@/ui'
 import * as SideBarMenu from '@radix-ui/react-navigation-menu'
 import { clsx } from 'clsx'
 import Link from 'next/link'
 
 import s from './menu-item.module.scss'
 
-import { SVGIconType } from '@/app'
-import { Typography } from '@/ui'
-
 type MenuItemProps<T extends ElementType = typeof Link> = {
   as?: T
-  label?: string
-  icon?: SVGIconType
+  asListItem?: boolean
   className?: string
   disabled?: boolean
+  icon?: SVGIconType
   isSelected?: boolean
-  asListItem?: boolean
   isStyled?: boolean
+  label?: string
 } & ComponentPropsWithoutRef<T>
 
 export const MenuItem = <T extends ElementType = typeof Link>({
   as,
+  asListItem = true,
+  children,
+  disabled,
   href,
   icon,
-  label,
-  disabled,
   isSelected,
-  asListItem = true,
   isStyled = true,
-  children,
+  label,
   ...props
 }: MenuItemProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof MenuItemProps<T>>) => {
   const SVGMenuIcon = icon || Fragment
@@ -37,20 +36,22 @@ export const MenuItem = <T extends ElementType = typeof Link>({
   const Container = asListItem ? SideBarMenu.Item : Fragment
 
   const styles = {
-    link: clsx(s.link, isStyled && s.active, disabled && s.disabled, isSelected && s.selected),
     label: clsx(isStyled && s.label, disabled && s.disabled),
+    link: clsx(s.link, isStyled && s.active, disabled && s.disabled, isSelected && s.selected),
   }
 
   return (
     <Container>
       <Component
-        href={href}
-        className={styles.link}
         aria-disabled={disabled}
         aria-hidden={disabled}
+        className={styles.link}
+        href={href || null}
+        tabIndex={disabled ? -1 : 0}
         {...props}
       >
         {children}
+
         <SVGMenuIcon />
         <Typography className={styles.label}>{label}</Typography>
       </Component>

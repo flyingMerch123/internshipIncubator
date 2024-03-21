@@ -2,11 +2,11 @@ import { ComponentPropsWithoutRef, ElementType, JSXElementConstructor } from 're
 
 import { Tags } from './enum'
 
-export type Tag = 'p' | 'div' | 'span' | 'h1' | 'h2' | 'h3'
+export type Tag = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span'
 
-export type ReactTag = keyof JSX.IntrinsicElements | JSXElementConstructor<any>
+export type ReactTag = JSXElementConstructor<any> | keyof JSX.IntrinsicElements
 
 export type TypographyProps<T extends ElementType> = {
+  as?: Extract<ReactTag, Tag> | T
   variant?: keyof typeof Tags
-  as?: T | Extract<ReactTag, Tag>
 } & ComponentPropsWithoutRef<T>

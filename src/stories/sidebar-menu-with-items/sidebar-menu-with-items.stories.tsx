@@ -1,21 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import s from './styles.module.scss'
+import { Provider } from 'react-redux'
 
+import { store } from '@/app/store/store'
 import { SidebarMenuWithItems } from '@/modules'
 
+import s from './styles.module.scss'
+
 const meta = {
-  title: 'Navigation/SidebarMenuWithItems',
+  argTypes: {},
   component: SidebarMenuWithItems,
   decorators: [
     Story => (
       <div style={{ height: '100vh' }}>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </div>
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Navigation/SidebarMenuWithItems',
 } satisfies Meta<typeof SidebarMenuWithItems>
 
 export default meta

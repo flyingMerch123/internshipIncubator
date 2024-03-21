@@ -1,16 +1,15 @@
-import { FC, useState } from 'react'
-
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { FC, useState } from 'react'
 
 import { Pagination, PaginationPropsType } from '@/ui/pagination'
 
 const meta = {
-  title: 'Components/Pagination',
+  argTypes: {},
   component: Pagination,
-  tags: ['autodocs'],
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
@@ -20,14 +19,15 @@ const meta = {
       exclude: /(?:\b|')(currentPage|pageSize|onPageChange)(?:\b|')/g,
     },
   },
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Components/Pagination',
 } satisfies Meta<typeof Pagination>
 
 const ControlledPagination: FC<PaginationPropsType> = ({
-  onPageSizeChange,
-  pageSize,
   currentPage,
   onPageChange,
+  onPageSizeChange,
+  pageSize,
   ...args
 }) => {
   const [page, setPage] = useState(1)
@@ -35,10 +35,10 @@ const ControlledPagination: FC<PaginationPropsType> = ({
 
   return (
     <Pagination
-      pageSize={+pSize}
-      onPageSizeChange={setPSize}
       currentPage={page}
       onPageChange={setPage}
+      onPageSizeChange={setPSize}
+      pageSize={+pSize}
       {...args}
     />
   )
@@ -49,6 +49,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     currentPage: 1,
+    onPageChange: () => {},
+    onPageSizeChange: () => {},
     pageSize: 20,
     siblingCount: 2,
     totalCount: 30,

@@ -1,22 +1,23 @@
-import { useRouter } from 'next/router'
-
-import s from './mobile-sidebar-menu-with-items.module.scss'
-
 import {
   CreateMenuIcon,
   HomeMenuIcon,
   MessageMenuIcon,
   ProfileMenuIcon,
   SearchMenuIcon,
-  menuNavigation,
 } from '@/app'
+import { menuNavigation } from '@/app/constants'
+import { useGetMeQuery } from '@/app/services/auth/auth.api'
 import { MenuItem, SidebarMenu } from '@/ui'
+import { useRouter } from 'next/router'
+
+import s from './mobile-sidebar-menu-with-items.module.scss'
 
 export const MobileSidebarMenuWithItems = () => {
   const { pathname } = useRouter()
+  const { data, isLoading } = useGetMeQuery()
 
   return (
-    <SidebarMenu className={s.nav}>
+    <SidebarMenu className={s.sidebar}>
       <MenuItem
         href={menuNavigation.home()}
         icon={HomeMenuIcon}
@@ -43,9 +44,9 @@ export const MobileSidebarMenuWithItems = () => {
         isStyled={false}
       />
       <MenuItem
-        href={menuNavigation.profile()}
+        href={menuNavigation.profile(data?.userId)}
         icon={ProfileMenuIcon}
-        isSelected={pathname.startsWith(menuNavigation.profile())}
+        isSelected={pathname.startsWith(menuNavigation.profile(data?.userId))}
         isStyled={false}
       />
     </SidebarMenu>

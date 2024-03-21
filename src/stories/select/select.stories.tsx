@@ -1,129 +1,115 @@
-import { useState } from 'react'
-
 import type { Meta } from '@storybook/react'
 
 import { Select } from '@/ui/select/select'
-import { SelectModel, SelectVariant } from '@/ui/select/select-types'
+import { SelectModel } from '@/ui/select/select-types'
 
 export default {
-  title: 'Components/Select',
   component: Select,
   decorators: [
     Story => (
       <div
-        style={{ margin: '3em', display: 'flex', justifyContent: 'center', listStyleType: 'none' }}
+        style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', margin: '3em' }}
       >
         <Story />
       </div>
     ),
   ],
   tags: ['autodocs'],
+  title: 'Components/Select',
 } satisfies Meta<typeof Select>
 
 const optionsPrimary = [
   {
-    value: 'Apple',
     label: 'Apple',
+    value: 'Apple',
   },
   {
-    value: 'Banana',
     label: 'Banana',
+    value: 'Banana',
   },
   {
-    value: 'Blueberry',
     label: 'Blueberry',
+    value: 'Blueberry',
   },
   {
-    value: 'Grapes',
     label: 'Grapes',
+    value: 'Grapes',
   },
 ]
 const optionsPagination = [
   {
-    value: '1',
     label: '1',
+    value: '1',
   },
   {
-    value: '2',
     label: '2',
+    value: '2',
   },
   {
-    value: '3',
     label: '3',
+    value: '3',
   },
   {
-    value: '4',
     label: '4',
+    value: '4',
   },
   {
-    value: '100',
     label: '100',
+    value: '100',
   },
 ]
 
 export const Simple = {
-  render: (args: SelectModel) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState('')
-
-    return (
-      <div style={{ display: 'flex', columnGap: '20px' }}>
-        <Select {...args} value={value} onChange={setValue} />
-      </div>
-    )
-  },
-
   args: {
     options: optionsPrimary,
+  },
+
+  render: (args: SelectModel) => {
+    return (
+      <div style={{ columnGap: '20px', display: 'flex' }}>
+        <Select {...args} />
+      </div>
+    )
   },
 }
 
 export const SimpleWithLabel = {
-  render: (args: SelectModel) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState('')
-
-    return (
-      <div>
-        <Select {...args} value={value} onChange={setValue} />
-      </div>
-    )
+  args: {
+    label: 'Select',
+    options: optionsPrimary,
+    placeholder: 'select...',
   },
 
-  args: {
-    placeholder: 'select...',
-    options: optionsPrimary,
-    label: 'Select',
+  render: (args: SelectModel) => {
+    return (
+      <div>
+        <Select {...args} />
+      </div>
+    )
   },
 }
 
 export const Pagination = {
-  render: (args: SelectModel) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState('')
-
-    return <Select {...args} value={value} onChange={setValue} />
+  args: {
+    label: 'pagination',
+    options: optionsPagination,
+    placeholder: '1',
+    variant: 'pagination',
   },
 
-  args: {
-    options: optionsPagination,
-    label: 'pagination',
-    variant: 'pagination',
-    placeholder: '1',
+  render: (args: SelectModel) => {
+    return <Select {...args} />
   },
 }
 
 export const FullWidth = {
-  render: (args: SelectModel) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState('')
-
-    return <Select {...args} value={value} onChange={setValue} />
-  },
-
   args: {
     options: optionsPrimary,
     variant: 'primary',
     width: '100%',
+  },
+
+  render: (args: SelectModel) => {
+    return <Select {...args} />
   },
 }

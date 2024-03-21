@@ -3,17 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Label } from '@/ui'
 
 const meta = {
-  title: 'Components/Label',
+  argTypes: {},
   component: Label,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Components/Label',
 } satisfies Meta<typeof Label>
 
 export default meta

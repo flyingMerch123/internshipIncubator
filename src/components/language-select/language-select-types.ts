@@ -6,4 +6,4 @@ export type FlagComponentProps = {
   locale?: LocalType
 }
 
-export type FlagSelectOption = { label: string | ReactElement; value: string }
+export type FlagSelectOption = { label: ReactElement | string; value: string }

@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .user {
+    overflow: hidden;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  button {
+    cursor: pointer;
+    position: relative;
+    margin-top: 1.5rem;
+    padding: 0 0.6rem;
+
+    &.replied {
+      cursor: pointer;
+      margin-top: 0;
+      color: var(--color-light-900);
+    }
+
+    div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 1px;
+      height: 1px;
+
+      opacity: 0;
+      background-color: transparent;
+      border-radius: 50%;
+      box-shadow: 0 0 transparent;
+      caret-color: transparent;
+
+      &.liked {
+        animation: splash-liked 0.4s ease-in-out;
+      }
+
+      &.unliked {
+        animation: splash-unliked 0.4s ease-in-out;
+      }
+
+      @keyframes splash-unliked {
+        75% {
+          transform: scale(4);
+          opacity: 0.8;
+          box-shadow: 0 0 4px 5px var(--color-dark-100);
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes splash-liked {
+        75% {
+          transform: scale(4);
+          opacity: 0.8;
+          box-shadow: 0 0 5px 3px var(--color-danger-500);
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .comment {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+
+      & button {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    gap: 1.2rem;
+
+    & span {
+      color: var(--color-light-900);
+    }
+  }
+}
+
+.wrapper {
+  margin-bottom: 2rem;
+}
+
+.content {
+  transform-origin: top;
+  transform: scaleY(1);
+  height: auto;
+  transition: 0.7s transform ease-in-out;
+
+  &.fade {
+    transform: scaleY(1.02);
+  }
+}

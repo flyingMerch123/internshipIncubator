@@ -3,17 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { DropdownMenuWithItems } from '@/modules'
 
 const meta = {
-  title: 'Navigation/DropdownMenuWithItems',
+  argTypes: {},
   component: DropdownMenuWithItems,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center', height: '25rem' }}>
+      <div style={{ display: 'flex', height: '25rem', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Navigation/DropdownMenuWithItems',
 } satisfies Meta<typeof DropdownMenuWithItems>
 
 export default meta

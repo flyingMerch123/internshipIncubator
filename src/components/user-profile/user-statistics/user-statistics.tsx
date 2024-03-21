@@ -1,10 +1,8 @@
+import { useMatchMedia, useTranslation } from '@/app'
+import { UserStatisticsItem } from '@/components'
 import { clsx } from 'clsx'
 
-import { MOCKED_DATA_STATISTICS } from './data'
 import s from './user-statistics.module.scss'
-
-import { useMatchMedia } from '@/app'
-import { UserStatisticsItem } from '@/components'
 
 type FetchedData = {
   category?: string
@@ -13,18 +11,20 @@ type FetchedData = {
 
 type UserStatisticsProps = {
   data?: Array<FetchedData>
+  totalCount?: number
 }
 
-export const UserStatistics = ({ data = [] }: UserStatisticsProps) => {
+export const UserStatistics = ({ data = [], totalCount }: UserStatisticsProps) => {
   const { isMobile } = useMatchMedia()
-
+  const { t } = useTranslation()
+  const { followers, following, publications } = t.profileSettings.generalSettings.profile
   const styles = clsx(s.container, isMobile && s.mobile)
 
   return (
     <div className={styles}>
-      {MOCKED_DATA_STATISTICS.map(({ category, qty }) => (
-        <UserStatisticsItem key={category} category={category} qty={qty} />
-      ))}
+      <UserStatisticsItem category={following.label} qty={2218} />
+      <UserStatisticsItem category={followers.label} qty={2851} />
+      <UserStatisticsItem category={publications.label} qty={totalCount} />
     </div>
   )
 }

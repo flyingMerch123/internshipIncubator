@@ -1,0 +1,44 @@
+.tableRoot {
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+.tableHead {
+  background-color: var(--color-dark-500);
+}
+
+.tableRow {
+  height: 48px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-color-primary);
+  text-align: left;
+
+  border-bottom: 1px solid var(--color-dark-500);
+
+  td {
+    padding-left: 24px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--text-color-primary);
+    vertical-align: middle;
+  }
+}
+
+.headCell {
+  padding-left: 24px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-color-primary);
+  vertical-align: middle;
+}
+
+.body {
+  border: 1px solid var(--color-dark-500);
+}

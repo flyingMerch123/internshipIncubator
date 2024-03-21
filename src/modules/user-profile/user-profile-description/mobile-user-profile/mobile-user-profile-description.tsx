@@ -1,10 +1,9 @@
-import Link from 'next/link'
-
-import s from './mobile-user-profile-description.module.scss'
-
 import { CheckedIcon } from '@/app'
 import { Avatar, UserStatistics } from '@/components'
 import { Typography } from '@/ui'
+import Link from 'next/link'
+
+import s from './mobile-user-profile-description.module.scss'
 
 export const MobileUserProfileDescription = () => {
   return (

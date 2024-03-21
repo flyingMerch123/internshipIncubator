@@ -1,8 +1,10 @@
-.nav {
+.sidebar {
+  padding: 0;
   visibility: hidden;
 
   div {
     position: fixed !important;
+    z-index: 15;
     bottom: 0;
     left: 0;
 
@@ -28,18 +30,15 @@
     & li:nth-child(5) {
       margin: 0;
 
-      &:hover {
-        all: unset;
-      }
-
       a {
         cursor: auto;
         display: block;
 
         -webkit-tap-highlight-color: transparent;
 
-        &:active,
-        &:hover {
+        &:hover,
+        &:active {
+          all: unset;
           color: var(--focus-color-primary);
 
           -webkit-tap-highlight-color: transparent;

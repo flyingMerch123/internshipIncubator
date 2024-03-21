@@ -1,11 +1,9 @@
 .wrapper {
   --header-height: 6rem;
 
-  position: fixed;
+  position: sticky;
   z-index: 10;
   top: 0;
-  right: 0;
-  left: 0;
 
   height: var(--header-height);
 

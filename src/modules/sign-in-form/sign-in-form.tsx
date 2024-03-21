@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
-
-import { DevTool } from '@hookform/devtools'
-import { LinearProgress } from '@mui/joy'
-import Link from 'next/link'
 import { toast } from 'react-toastify'
 
-import s from './sign-in-form.module.scss'
-
-import {
-  authNavigationUrls,
-  ErrorWithData,
-  showError,
-  useSignInMutation,
-  useTranslation,
-} from '@/app'
-import { ControlledTextField } from '@/components/text-field-controlled/controlled-text-field'
-import { useSignInForm } from '@/modules/sign-in-form/use-sign-in-form'
+import { ErrorWithData, useTranslation } from '@/app'
+import { authNavigationUrls } from '@/app/constants'
+import { useSignInMutation } from '@/app/services/auth/auth.api'
+import { showError } from '@/app/utils'
+import { ControlledTextField } from '@/components'
+import { useSignInForm } from '@/modules'
 import { Button, Card, GithubButton, GoogleButton, Typography } from '@/ui'
+import { DevTool } from '@hookform/devtools'
+import Link from 'next/link'
+
+import s from './sign-in-form.module.scss'
 
 export const SignInForm = () => {
   //TODO remove progressBar state after refactoring oAuthButtons
@@ -24,11 +19,11 @@ export const SignInForm = () => {
   const [signIn, { isLoading }] = useSignInMutation()
 
   const {
-    handleSubmit,
-    formState: { isValid, dirtyFields },
     control,
+    formState: { isDirty, isLoading: isFormLoading, isValid },
+    handleSubmit,
   } = useSignInForm()
-  const isButtonDisabled = isLoading || (dirtyFields && !isValid)
+  const isButtonDisabled = isFormLoading || !isValid || !isDirty
 
   const { t } = useTranslation()
   const { signInForm: text } = t.authPages.signInPage
@@ -37,7 +32,7 @@ export const SignInForm = () => {
     signIn(data)
       .unwrap()
       .then(() => {
-        toast.success('you are sign in successfully')
+        toast.success('signed in successfully!')
       })
       .catch((error: ErrorWithData) => {
         showError(error)
@@ -47,9 +42,6 @@ export const SignInForm = () => {
   return (
     <div>
       <Card className={s.container}>
-        <div className={s.progressBar}>
-          {(isLoading || progressBar) && <LinearProgress thickness={3} color={'neutral'} />}
-        </div>
         <form className={s.form} onSubmit={onSubmitForm}>
           <div className={s.wrapper}>
             <Typography className={s.header} variant={'h1'}>
@@ -62,28 +54,23 @@ export const SignInForm = () => {
             <DevTool control={control} />
             <ControlledTextField
               className={s.textField}
+              control={control}
               label={text.email}
               name={'email'}
-              control={control}
             />
             <ControlledTextField
               className={s.textField}
+              control={control}
+              inputType={'password'}
               label={text.password}
               name={'password'}
-              inputType={'password'}
-              control={control}
             />
             <Link href={authNavigationUrls.forgotPassword()}>
               <Typography className={s.forgotPassword} variant={'regular-14'}>
                 {text.forgotPassword}
               </Typography>
             </Link>
-            <Button
-              disabled={isButtonDisabled}
-              type={'submit'}
-              className={s.signInBtn}
-              fullWidth={true}
-            >
+            <Button className={s.signInBtn} disabled={isButtonDisabled} fullWidth type={'submit'}>
               {text.signIn}
             </Button>
             <Typography className={s.accountText} variant={'regular-16'}>
@@ -91,10 +78,10 @@ export const SignInForm = () => {
             </Typography>
 
             <Button
-              className={s.signUpBtn}
               as={Link}
-              variant={'link'}
+              className={s.signUpBtn}
               href={authNavigationUrls.signUp()}
+              variant={'link'}
             >
               {text.signUp}
             </Button>

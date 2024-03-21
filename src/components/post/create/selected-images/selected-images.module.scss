@@ -1,0 +1,69 @@
+.imgContainer {
+  width: 49rem;
+  height: 45.7rem;
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 46.7rem;
+}
+
+.filterContainer {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 42rem;
+  height: 45.7rem;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--text-color-disabled);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 75%);
+  }
+}
+
+.imgWithFilter {
+  display: flex;
+  flex-direction: column;
+  margin: 1.2rem;
+}
+
+.image {
+  cursor: pointer;
+  margin-bottom: 0.2rem;
+  object-fit: cover;
+}
+
+.filterName {
+  display: flex;
+  justify-content: center;
+  width: 10.8rem;
+  height: 2.4rem;
+}
+
+.slick-next {
+  right: 1.5rem;
+}
+
+.slick-prev {
+  left: 1.5rem;
+}
+
+.slick-dots {
+  bottom: 1rem;
+  color: #fff;
+}

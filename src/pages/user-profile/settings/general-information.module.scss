@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  .divider {
+    height: 1px;
+    background-color: #333;
+  }
+
+  .btn {
+    align-self: flex-end;
+  }
+
+  .content {
+    display: flex;
+    column-gap: 4rem;
+
+    .image {
+      padding-top: 2.4rem;
+    }
+
+    .wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 2.4rem;
+
+      .select {
+        display: flex;
+        column-gap: 24px;
+      }
+    }
+
+    .text {
+      color: #8d9094;
+    }
+  }
+}

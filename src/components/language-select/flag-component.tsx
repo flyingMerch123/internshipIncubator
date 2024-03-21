@@ -1,9 +1,10 @@
-import { FlagComponentProps } from './language-select-types'
+import { useMatchMedia, useTranslation } from '@/app'
+import { LocalType, flagIcons } from '@/app/constants/enums'
+import { Typography } from '@/ui'
+
 import s from './language-select.module.scss'
 
-import { useMatchMedia, useTranslation } from '@/app'
-import { flagIcons, LocalType } from '@/app/constants/enums'
-import { Typography } from '@/ui'
+import { FlagComponentProps } from './language-select-types'
 
 export const FlagComponent = ({ locale = LocalType.EN }: FlagComponentProps) => {
   const { isMobile } = useMatchMedia()

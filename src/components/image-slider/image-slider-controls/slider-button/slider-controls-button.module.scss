@@ -1,0 +1,57 @@
+.buttonSlider {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  display: block;
+
+  padding: 1rem;
+
+  opacity: 0.5;
+
+  transition: background-color 100ms ease-in-out;
+
+  &:focus-visible {
+    outline: var(--color-accent-500) 1px solid;
+  }
+
+  &:hover {
+    opacity: 1;
+    background-color: rgb(0 0 0 / 20%);
+  }
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3.6rem;
+    height: 3.6rem;
+
+    background-color: var(--color-dark-300);
+    border-radius: 0.2rem;
+
+    & > svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+}
+
+.editModeSlider {
+  @extend .buttonSlider;
+  bottom: 20rem;
+  top: 24rem;
+}

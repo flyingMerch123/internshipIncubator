@@ -1,20 +1,19 @@
+import { NotificationsBell } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { NotificationsBell } from '@/components'
-
 const meta = {
-  title: 'Components/NotificationsBell',
-  component: NotificationsBell,
-  tags: ['autodocs'],
+  argTypes: {},
   args: {},
+  component: NotificationsBell,
   decorators: [
     Story => (
-      <div style={{ margin: '3em', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '3em' }}>
         <Story />
       </div>
     ),
   ],
-  argTypes: {},
+  tags: ['autodocs'],
+  title: 'Components/NotificationsBell',
 } satisfies Meta<typeof NotificationsBell>
 
 export default meta

@@ -1,7 +1,7 @@
 const Favorites = () => {
   return (
     <>
-      <h1 style={{ textAlign: 'center', margin: '10rem ' }}>Favorites</h1>
+      <h1 style={{ margin: '10rem ', textAlign: 'center' }}>Favorites</h1>
     </>
   )
 }

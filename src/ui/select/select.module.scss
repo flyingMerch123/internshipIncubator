@@ -122,6 +122,7 @@
 .icon {
   width: 24px;
   height: 24px;
+  transition: 0.2s transform ease-in;
 
   &.pagination {
     display: flex;

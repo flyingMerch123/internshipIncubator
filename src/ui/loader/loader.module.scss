@@ -1,9 +1,10 @@
 .loader {
-  display: inline-block;
+  display: block;
 
   box-sizing: border-box;
   width: 2.4rem;
   height: 2.4rem;
+  margin: 0 auto;
 
   border-top: 3px solid #fff;
   border-right: 3px solid transparent;

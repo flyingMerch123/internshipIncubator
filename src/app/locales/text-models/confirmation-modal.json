@@ -1,0 +1,55 @@
+{
+  "en": {
+    "logOut": {
+      "title": "Log Out",
+      "message": "Do you really want to log out of your account?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "deleteAvatar": {
+      "title": "Delete Photo",
+      "message": "Are you sure you want to delete photo?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "closePost": {
+      "title": "Close Post",
+      "message": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "deletePost": {
+      "title": "Delete Post",
+      "message": "Are sure you want to delete this post?",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "ru": {
+    "logOut": {
+      "title": "Выйти",
+      "message": "Вы уверены что хотите выйти из аккаунта?",
+      "yes": "Да",
+      "no": "Нет"
+    },
+    "deleteAvatar": {
+      "title": "Удаление Аватарки",
+      "message": "Вы уверены что хотите удалить аватарку?",
+      "yes": "Да",
+      "no": "Нет"
+    },
+    "closePost": {
+      "title": "Закрыть Пост",
+      "message": "Вы действительно хотите завершить редактирование? Если закроете внесенные ранее изменения не сохранятся.",
+      "yes": "Да",
+      "no": "Нет"
+    },
+    "deletePost": {
+      "title": "Удалить Пост",
+      "message": "Вы уверены что хотите удалить этот пост?",
+      "yes": "Да",
+      "no": "Нет"
+    }
+  }
+}
+

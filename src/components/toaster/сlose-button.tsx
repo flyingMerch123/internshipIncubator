@@ -1,10 +1,11 @@
 import { CloseButtonProps } from 'react-toastify'
 
+import { CloseIcon } from '@/app/assets/svg'
+
 import s from './close-button.module.scss'
 
-import { CloseIcon } from '@/app/assets/svg'
 export const LoseButton = ({ closeToast }: CloseButtonProps) => (
-  <button onClick={closeToast} type={'button'} className={s.closeButton}>
+  <button className={s.closeButton} onClick={closeToast} type={'button'}>
     <CloseIcon />
   </button>
 )

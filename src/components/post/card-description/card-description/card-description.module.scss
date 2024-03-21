@@ -1,0 +1,25 @@
+.description {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+
+  .user {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    gap: 1.2rem;
+  }
+
+  .info {
+    & p {
+      display: block;
+    }
+
+    .button {
+      cursor: pointer;
+      margin-left: 0.2rem;
+      color: var(--color-accent-500);
+    }
+  }
+}

@@ -4,9 +4,9 @@ const tagsRegex = /(<\d+>[^<>]*<\/\d+>)/
 const openCloseTagRegex = /<(\d+)>([^<>]*)<\/(\d+)>/
 
 type Props<T> = {
-  text: string
-  tags?: Record<string, (str: string) => JSX.Element>
   as?: T
+  tags?: Record<string, (str: string) => JSX.Element>
+  text: string
 }
 
 export const TagProcessor = <T extends ElementType = 'div'>(props: Props<T>) => {
@@ -16,7 +16,7 @@ export const TagProcessor = <T extends ElementType = 'div'>(props: Props<T>) => 
 }
 
 const interpolateTags = (data: Omit<Props<any>, 'as'>) => {
-  const { text, tags } = data
+  const { tags, text } = data
 
   if (!tags) {
     return text

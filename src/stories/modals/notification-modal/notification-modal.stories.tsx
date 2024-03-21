@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { NotificationModal } from '@/components'
 
 const meta: Meta<typeof NotificationModal> = {
-  title: 'Components/NotificationModal',
+  argTypes: {},
   component: NotificationModal,
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Components/NotificationModal',
 }
 
 export default meta

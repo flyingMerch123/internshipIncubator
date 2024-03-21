@@ -1,0 +1,109 @@
+.container {
+  --animation-duration: 0.5s;
+  --animation-color-v1: var(--color-danger-500);
+  --animation-color-v2: var(--color-warning-100);
+
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 2.4rem;
+
+  & button {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s all ease-in;
+
+    &:hover {
+      transform: translateY(-1.5px) scale(1.05);
+      color: var(--focus-color-secondary);
+    }
+
+    &:active {
+      color: var(--focus-color-primary);
+    }
+  }
+
+  .icons {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    transition: 0.3s all ease;
+  }
+}
+
+.animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 transparent;
+  caret-color: transparent;
+
+  .like {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &.liked {
+    animation: splash-liked var(--animation-duration) ease-in-out;
+  }
+
+  &.favourite {
+    animation: add-favourite var(--animation-duration) ease-in-out;
+  }
+
+  @keyframes splash-liked {
+    75% {
+      transform: scale(4);
+      opacity: 0.8;
+      box-shadow: 0 0 5px 3px var(--animation-color-v1);
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes add-favourite {
+    75% {
+      transform: scale(4);
+      opacity: 0.8;
+      box-shadow: 0 0 5px 3px var(--animation-color-v2);
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .icons {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .favourites {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.containerV2 {
+  padding: 1.2rem 0;
+
+  .iconsV2 {
+    gap: 2rem;
+  }
+}

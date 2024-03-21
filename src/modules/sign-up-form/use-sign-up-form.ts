@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { useTranslation } from '@/app/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export const useSignupForm = () => {
   const { t } = useTranslation()
@@ -10,16 +10,11 @@ export const useSignupForm = () => {
   const {
     signUpForm: { formErrors },
   } = t.authPages.signUpPage
-  const { email, password, userName, confirmPassword } = formErrors
+  const { confirmPassword, email, password, userName } = formErrors
 
   const signUpFormSchema = z
     .object({
-      userName: z
-        .string({ required_error: `${userName.required}` })
-        .trim()
-        .min(6, `${userName.length}`)
-        .max(30, `${userName.maxLength}`)
-        .regex(/^[0-9A-Za-z_-]+$/),
+      confirmPassword: z.string({ required_error: `${confirmPassword.required}` }).trim(),
       email: z
         .string({ required_error: `${email.required}` })
         .trim()
@@ -32,17 +27,22 @@ export const useSignupForm = () => {
         .min(6, `${password.length}`)
         .max(20, `${password.maxLength}`)
         .regex(
-          /(?=.*[0-9])(?=.*[!"#$%&'()*+,-_./:;<=>?@[\]^{|}~])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!"#$%&'()*+,-_./:;<=>?@[\]^{|}~]{6,}/g,
+          /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])[0-9A-Za-z!#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{6,20}$/,
           `${password.pattern}`
         ),
-      confirmPassword: z.string({ required_error: `${confirmPassword.required}` }).trim(),
       policy: z.literal<boolean>(true),
+      userName: z
+        .string({ required_error: `${userName.required}` })
+        .trim()
+        .min(6, `${userName.length}`)
+        .max(30, `${userName.maxLength}`)
+        .regex(/^[0-9A-Za-z_-]+$/),
     })
     .superRefine((data, ctx) => {
       if (data.password !== data.confirmPassword) {
         ctx.addIssue({
-          message: `${confirmPassword.matchPasswords}`,
           code: z.ZodIssueCode.custom,
+          message: `${confirmPassword.matchPasswords}`,
           path: ['confirmPassword'],
         })
       }
@@ -53,14 +53,14 @@ export const useSignupForm = () => {
   type SignUpFormType = z.infer<typeof signUpFormSchema>
 
   return useForm<SignUpFormType>({
-    resolver: zodResolver(signUpFormSchema),
-    mode: 'onBlur',
     defaultValues: {
       confirmPassword: '',
       email: '',
       password: '',
-      userName: '',
       policy: false,
+      userName: '',
     },
+    mode: 'onBlur',
+    resolver: zodResolver(signUpFormSchema),
   })
 }

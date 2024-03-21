@@ -1,9 +1,11 @@
-import { ChromeBrowserIcon, DesktopIcon, MobileIcon } from '@/app'
-import { DeviceInformationCard } from '@/components/devices'
-import { Button } from '@/ui'
+import { NextPageWithLayout } from '@/pages/_app'
 
-const Search = () => {
-  return <h1 style={{ textAlign: 'center', margin: '10rem 0 5rem' }}>Search</h1>
+const Search: NextPageWithLayout = () => {
+  return (
+    <div>
+      <h1 style={{ margin: '10rem 0 5rem', textAlign: 'center' }}>Search</h1>
+    </div>
+  )
 }
 
 export default Search

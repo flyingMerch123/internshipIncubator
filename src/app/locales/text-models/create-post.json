@@ -1,0 +1,16 @@
+{
+  "en": {
+    "add": "Add photo",
+    "cropping": "Cropping",
+    "filters": "Filters",
+    "publication": "Publication",
+    "select": "Select from computer"
+  },
+  "ru": {
+    "add": "Добавить фото",
+    "cropping": "Обрезать фото",
+    "filters": "Фильтры",
+    "publication": "Публикация",
+    "select": "Выбрать с компьютера"
+  }
+}

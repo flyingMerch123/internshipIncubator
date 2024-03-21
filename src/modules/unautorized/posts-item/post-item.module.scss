@@ -1,0 +1,51 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 23.4rem;
+  height: 39.1rem;
+
+  .photoBlock {
+    width: 23.4rem;
+    height: 24rem;
+
+    .imageBlock {
+      width: 23.4rem;
+      height: 24rem;
+      object-fit: cover;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .collapsePhotoBlock {
+    height: 11.2rem;
+
+    .collapseImageBlock {
+      height: 11.2rem;
+    }
+  }
+
+  .header {
+    cursor: pointer;
+
+    display: flex;
+    gap: 1.3rem;
+    align-items: center;
+    margin-top: 0.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .status {
+    margin-bottom: 0.5rem;
+    color: var(--color-light-900);
+  }
+
+  .button {
+    cursor: pointer;
+    margin-left: 0.2rem;
+    color: var(--color-accent-500);
+  }
+}

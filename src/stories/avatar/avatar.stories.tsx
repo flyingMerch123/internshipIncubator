@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Avatar } from '@/components'
 
 const meta = {
-  title: 'Components/Avatar',
-  component: Avatar,
+  argTypes: {},
   args: {
     src: 'https://static.vidnoz.com/system/tool/talking_head/v5/02.png',
   },
+  component: Avatar,
   decorators: [
     Story => (
       <div style={{ margin: '3em' }}>
@@ -16,7 +16,7 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  argTypes: {},
+  title: 'Components/Avatar',
 } satisfies Meta<typeof Avatar>
 
 export default meta
@@ -38,7 +38,7 @@ export const FallbackAvatarImage: Story = {
 
 export const MobileVersion: Story = {
   args: {
-    width: 72,
     height: 72,
+    width: 72,
   },
 }

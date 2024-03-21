@@ -1,0 +1,91 @@
+.container {
+  position: relative;
+
+  &:focus {
+    outline: 1px solid var(--color-accent-500);
+  }
+}
+
+.wrapper {
+  position: absolute;
+  bottom: -5.3rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 1.2rem;
+}
+
+.trigger {
+  cursor: pointer;
+
+  z-index: 25;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3.6rem;
+  height: 3.6rem;
+
+  opacity: 0.8;
+  background-color: rgb(23 23 23 / 80%);
+  border-radius: 2px;
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}
+
+.menu {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  padding: 12px;
+
+  background-color: rgb(23 23 23 / 80%);
+  border-radius: 2px;
+}
+
+.image {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  bottom: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+  justify-self: flex-start;
+
+  background-color: rgb(23 23 23 / 80%);
+  border-radius: 0.2rem;
+}
+
+.menuItem {
+  display: flex;
+  column-gap: 3rem;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--color-light-900);
+
+  .selected {
+    color: var(--color-light-100);
+  }
+
+  &:hover {
+    color: var(--color-light-100);
+  }
+}
+
+.cropMenu {
+  display: flex;
+  gap: 1.2rem;
+}
